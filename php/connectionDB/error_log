@@ -1,0 +1,2 @@
+[05-May-2019 14:33:40 UTC] PHP Fatal error:  Call to a member function query() on null in /home/amitsl/public_html/php/connectionDB/connection.php on line 7
+[05-May-2019 14:33:42 UTC] PHP Fatal error:  Call to a member function query() on null in /home/amitsl/public_html/php/connectionDB/connection.php on line 7
