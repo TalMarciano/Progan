@@ -1,0 +1,551 @@
+.floatRight{
+	float:right;
+}
+.centerText{
+	text-align:center !important;
+}
+
+.centerNavBar{
+    display:inline-block;
+    text-align:center;
+}
+.centerTableTr{
+    text-align:center;
+}
+
+#test{
+    text-align:center;
+}
+
+.textRight{
+	text-align: right;
+	width: 33%;
+	float: right;
+}
+
+.formRight{
+    text-align: right;
+
+}
+
+.marginAndFloat{
+    float: right;
+    margin-left: 3%;
+}
+
+.buttonMargin{
+    margin-top: 2%;
+    margin-left: 43%;
+    
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#mySearch2 {
+    text-align: center;
+    color: "red";
+    border-color: red;
+    /*הסטוריית מכירות - נסיון על כפתור החיפוש*/
+}
+
+
+
+
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Progan Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/ourCss/style.css">
+    <!-- Google Fonts ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS ============================================ -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- font awesome CSS ============================================ -->
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <!-- owl.carousel CSS ============================================ -->
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/owl.theme.css">
+    <link rel="stylesheet" href="../css/owl.transitions.css">
+    <!-- meanmenu CSS ============================================ -->
+    <link rel="stylesheet" href="../css/meanmenu/meanmenu.min.css">
+    <!-- animate CSS ============================================ -->
+    <link rel="stylesheet" href="../css/animate.css">
+    <!-- normalize CSS ============================================ -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <!-- mCustomScrollbar CSS============================================ -->
+    <link rel="stylesheet" href="../css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- jvectormap CSS	============================================ -->
+    <link rel="stylesheet" href="../css/jvectormap/jquery-jvectormap-2.0.3.css">
+    <!-- notika icon CSS ============================================ -->
+    <link rel="stylesheet" href="../css/notika-custom-icon.css">
+    <!-- main CSS ============================================ -->
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- wave CSS ============================================ -->
+    <link rel="stylesheet" href="../css/wave/waves.min.css">
+    <!-- style CSS ============================================ -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style2.css">
+    <!-- responsive CSS	============================================ -->
+    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- modernizr JS ============================================ -->
+    <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Start Header Top Area -->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+				<div class="logo-area">
+                    <img src="../images/logo.png" alt="" />
+				</div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top Area -->
+    <!-- Mobile Menu start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul class="mobile-menu-nav">
+                                <li><a data-toggle="collapse" data-target="#Charts" href="dashboard.php">בית</a>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#sellMobile">מכירה</a>
+                                    <ul id="sellMobile" class="collapse dropdown-header-top">
+                                        <li><a href="newSale.php">מכירה חדשה</a></li>
+                                        <li><a href="view-email.html">היסטוריית מכירות</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#repairMobile" href="#">תיקון</a>
+                                    <ul id="repairMobile" class="collapse dropdown-header-top">
+                                        <li><a href="animations.html">תיקון חדש</a></li>
+                                        <li><a href="google-map.html">תיקונים בטיפול</a></li>
+                                        <li><a href="data-map.html">תיקונים שהושלמו</a></li>
+                                        <li><a href="code-editor.html">תיקונים שנאספו</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#rentMobile" href="#">השכרה</a>
+                                    <ul id="rentMobile" class="collapse dropdown-header-top">
+                                        <li><a href="flot-charts.html">השכרה חדשה</a></li>
+                                        <li><a href="bar-charts.html">השכרות בפועל</a></li>
+                                        <li><a href="line-charts.html">השכרות שהושלמו</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#stockMobile" href="#">מלאי</a>
+                                    <ul id="stockMobile" class="collapse dropdown-header-top">
+                                        <li><a href="normal-table.html">מלאי מוצרים</a></li>
+                                        <li><a href="data-table.html">מלאי השכרות</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#customersMobile" href="#">לקוחות</a>
+                                    <ul id="customersMobile" class="collapse dropdown-header-top">
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#usersMobile" href="#">משתמשים</a>
+                                    <ul id="usersMobile" class="collapse dropdown-header-top">
+									</ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu end -->
+    <!-- Main Menu area start-->
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left:200px;">
+                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro" >
+                        <li><a data-toggle="tab" href="#users">משתמשים</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#customers">לקוחות</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#stock">מלאי</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#rent">השכרה</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#repair">תיקון</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#sell">מכירה</a>
+                        </li>
+						<li class="active"><a data-toggle="tab" href="#Home">בית</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                        <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
+                        </div>
+                        <div id="sell" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="inbox.html">הסטוריית מכירות</a>
+                                </li>
+                                <li><a href="view-email.html">מכירה חדשה</a>
+                                </li>
+                            </ul>
+                        </div>
+						<div id="repair" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="inbox.html">תיקונים שנאספו</a>
+                                </li>
+                                <li><a href="view-email.html">תיקונים שהושלמו</a>
+                                </li>
+								<li><a href="view-email.html">תיקונים שבטיפול</a>
+                                </li>
+								<li><a href="view-email.html">תיקון חדש</a>
+                                </li>
+                            </ul>
+                        </div>
+						<div id="rent" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="inbox.html">השכרות בפועל</a>
+                                </li>
+                                <li><a href="view-email.html">השכרות שהושלמו</a>
+                                </li>
+								<li><a href="view-email.html">השכרה חדשה</a>
+                                </li>
+                            </ul>
+                        </div>
+						<div id="stock" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="inbox.html">מלאי השכרות</a>
+                                </li>
+                                <li><a href="view-email.html">מלאי מוצרים</a>
+                            </ul>
+                        </div>
+						<div id="customers" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                            </ul>
+                        </div>
+						<div id="users" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- End Realtime sts area-->
+        
+     <!-- Main Menu area End-->
+     
+     
+     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+     
+     
+    <!-- Breadcomb area Start-->
+    <div class="breadcomb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcomb-list">
+                        <div class="row">
+                            <h2 style="text-align:center">לקוחות</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcomb area End-->
+
+    <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                        </div>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="centerTableTr">סוג הרשאה</th>
+                                        <th class="centerTableTr">מייל</th>
+                                        <th class="centerTableTr">שם משתמש</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="centerTableTr">מנהל</td>
+                                        <td class="centerTableTr">ami@gmail.com</td>
+                                        <td class="centerTableTr">עמי מרציאנו</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="centerTableTr">מנהל</td>
+                                        <td class="centerTableTr">ami@gmail.com</td>
+                                        <td class="centerTableTr">עמי מרציאנו</td
+                                    </tr>
+                                    <tr>
+                                        <td class="centerTableTr">מנהל</td>
+                                        <td class="centerTableTr">ami@gmail.com</td>
+                                        <td class="centerTableTr">עמי מרציאנו</td
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Data Table area End-->
+
+
+        <main>
+        <div id="rowMyAccount" class="row">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active left-navbar-my-account" id="v-pills-Account-Info-tab" data-toggle="pill" href="#v-pills-Account-Info" role="tab" aria-controls="v-pills-Account-Info" aria-selected="true">Account Info</a>
+                <a class="nav-link left-navbar-my-account" id="v-pills-purchase-History-tab" data-toggle="pill" href="#v-pills-purchase-History" role="tab" aria-controls="v-pills-purchase-History" aria-selected="false">Purchase History</a>
+                <a class="nav-link left-navbar-my-account" id="v-pills-My-Favorites-tab" data-toggle="pill" href="#v-pills-My-Favorites" role="tab" aria-controls="v-pills-My-Favorites" aria-selected="false">Recommended</a>
+            </div>
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-Account-Info" role="tabpanel" aria-labelledby="v-pills-Account-Info-tab">
+                    <div class="card" id="card-my-account-tabs">
+                        <div class="card-body" id="card-my-account-body">
+                            <div class="card-title" id="card-my-account-title">
+                                <h5>Login Details</h5>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-sm button-my-account" data-toggle="modal" data-target="#exampleModal1">Edit</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit Login Details</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <p>First Name: <span id="firstNameEdit"></span></p>
+                                                    <p>Last Name: <span id="lastNameEdit"></span></p>
+                                                    <p>Email Address: <span id="emailEdit"></span></p>
+                                                    <p><u>Update Password:</u></p>
+                                                    <p>Old Password: <input type="password"></p>
+                                                    <p id="password">New Password: <input type="password"></p>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn button-my-account" title="unsigned">Save Changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Full Name: <span id="fullName"></span></p>
+                            <p>Email Address: <span id="email"></span></p>
+                            
+                        </div>
+                    </div>
+                    <div class="card" id="card-my-account-tabs">
+                        <div class="card-body" id="card-my-account-body">
+                            <div class="card-title" id="card-my-account-title">
+                                <h5>Shipping Address</h5>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-sm button-my-account" data-toggle="modal" data-target="#exampleModal2">Edit</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit Shipping Address</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p id="address1Edit">Address1: <input type="text"></p>
+                                                <p id="cityEdit">City: <input type="text"></p>
+                                                <p id="countryEdit">Country: <input type="text"></p>
+                                                <p id="phoneEdit">Phone Number: <input type="phone"></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn button-my-account" id="editShippingDetails" title="unsigned">Save Changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Address1: <span id="address1"></span></p> 
+                            <p>City: <span id="city"></span></p>
+                            <p>Country: <span id="country"></span></p>
+                            <p>Phone Number: <span id="phone"></span></p>
+                        </div>
+                    </div>
+                    <div class="card" id="card-my-account-tabs">
+                        <div class="card-body" id="card-my-account-body">
+                            <div class="card-title" id="card-my-account-title">
+                                <h5>Receive News</h5>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-sm button-my-account" data-toggle="modal" data-target="#exampleModal3">Save</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header text-center">
+                                                <h5 class="modal-title" id="exampleModalLabel">Receive News</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">I agree to receive news and advertisements to my email.</div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn button-my-account" title="unsigned">Save Changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p><input type="checkbox" name="news"> ADISA News</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-md button-my-account" id="logOutBtn">LogOut</button>
+                </div>
+                <div class="tab-pane fade" id="v-pills-purchase-History" role="tabpanel" aria-labelledby="v-pills-purchase-History-tab">
+                    <table class="table col-12" id="tableID">
+                          <thead>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody id="tbody">
+                            
+                          </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="v-pills-My-Favorites" role="tabpanel" aria-labelledby="v-pills-My-Favorites-tab" style="width:100%;">
+                    <div id="chartContainerColumns" style="height:400px;width:100%;margin:auto;"></div>
+                    <div id="chartContainerPie" style="height:400px;width:100%;margin:auto;"></div>
+                    <script>
+                           
+                    </script>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Start Footer area-->
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright © Amit Salim, Tal Marziano, Chen Rahamim.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        <!-- End Footer area-->
+        
+
+        
+        
+    <!-- jquery ============================================ -->
+    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS ============================================ -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- wow JS ============================================ -->
+    <script src="../js/wow.min.js"></script>
+    <!-- price-slider JS ============================================ -->
+    <script src="js/jquery-price-slider.js"></script>
+    <!-- owl.carousel JS ============================================ -->
+    <script src="../js/owl.carousel.min.js"></script>
+    <!-- scrollUp JS ============================================ -->
+    <script src="../js/jquery.scrollUp.min.js"></script>
+    <!-- meanmenu JS ============================================ -->
+    <script src="../js/meanmenu/jquery.meanmenu.js"></script>
+    <!-- counterup JS ============================================ -->
+    <script src="../js/counterup/jquery.counterup.min.js"></script>
+    <script src="../js/counterup/waypoints.min.js"></script>
+    <script src="../js/counterup/counterup-active.js"></script>
+    <!-- mCustomScrollbar JS ============================================ -->
+    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- jvectormap JS ============================================ -->
+    <script src="../js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="../js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../js/jvectormap/jvectormap-active.js"></script>
+    <!-- sparkline JS ============================================ -->
+    <script src="../js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="../js/sparkline/sparkline-active.js"></script>
+    <!-- flot JS ============================================ -->
+    <script src="../js/flot/jquery.flot.js"></script>
+    <script src="../js/flot/jquery.flot.resize.js"></script>
+    <script src="../js/flot/jquery.flot.pie.js"></script>
+    <script src="../js/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="../js/flot/jquery.flot.orderBars.js"></script>
+    <script src="../js/flot/curvedLines.js"></script>
+    <script src="../js/flot/flot-active.js"></script>
+    <!-- knob JS ============================================ -->
+    <script src="../js/knob/jquery.knob.js"></script>
+    <script src="../js/knob/jquery.appear.js"></script>
+    <script src="../js/knob/knob-active.js"></script>
+    <!--  wave JS ============================================ -->
+    <script src="../js/wave/waves.min.js"></script>
+    <script src="../js/wave/wave-active.js"></script>
+    <!--  Chat JS ============================================ -->
+	<script src="../js/chat/moment.min.js"></script>
+    <script src="../js/chat/jquery.chat.js"></script>
+    <!--  todo JS ============================================ -->
+    <script src="../js/todo/jquery.todo.js"></script>
+    <!-- plugins JS ============================================ -->
+    <script src="../js/plugins.js"></script>
+    <!-- main JS ============================================ -->
+    <script src="../js/main.js"></script>
+    <script>
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("TestCusomers");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("data-table-basic");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+
+</html>
