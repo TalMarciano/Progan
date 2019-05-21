@@ -72,7 +72,7 @@
         let td;
          for (child = 1; child < length; child++) {  
              td = children[child];
-             if(td.innerHTML.toUpperCase().startsWith(filter)) {
+             if(td.innerHTML.toUpperCase().includes(filter)) {
                  return true
              }
         }
@@ -111,13 +111,12 @@
                                     <tr>
                                         <th class="centerTableTr">שמור</th>
                                         <th class="centerTableTr">סטטוס</th>
-                                        <th class="centerTableTr">תאריך סיום משוער</th>
+                                        <th class="centerTableTr">מספר ימים משוער לתיקון</th>
                                         <th class="centerTableTr">תאריך פתיחת טיפול</th>
                                         <th class="centerTableTr">מחיר משוער</th>
                                         <th class="centerTableTr">פירוט הבעיה</th>
                                         <th class="centerTableTr">ת"ז לקוח</th>
                                         <th class="centerTableTr">שם לקוח</th>
-                                        <th class="centerTableTr">שם הספק</th>
                                         <th class="centerTableTr">מק"ט</th>
                                         <th class="centerTableTr">שם המוצר</th>
                                         <th class="centerTableTr">מס' תיקון</th>
@@ -125,63 +124,43 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">
-                                        <select name=select1>  
-                                            <option value="1">בטיפול</option>  
-                                            <option value="2">הושלם</option>  
-                                            <option value="3">נאסף</option>  
-                                        </select> </td>
-                                        <td class="centerTableTr">10/03/19</td>
-                                        <td class="centerTableTr">01/03/19</td>
-                                        <td class="centerTableTr">450₪</td>
-                                        <td class="centerTableTr">מנוע מקולקל</td>
-                                        <td class="centerTableTr">12345678</td>
-                                        <td class="centerTableTr">יוסי כהן</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                        <td class="centerTableTr">1</td>
-                                        </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">
-                                        <select name=selectStatus>  
-                                            <option value="1" selected>בטיפול</option>  
-                                            <option value="2">הושלם</option>  
-                                            <option value="3">נאסף</option>  
-                                        </select> </td>
-                                        <td class="centerTableTr">10/03/19</td>
-                                        <td class="centerTableTr">01/03/19</td>
-                                        <td class="centerTableTr">450₪</td>
-                                        <td class="centerTableTr">מנוע מקולקל</td>
-                                        <td class="centerTableTr">12345678</td>
-                                        <td class="centerTableTr">יוסי כהן</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                        <td class="centerTableTr">2</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">
-                                        <select name=selectStatus>  
-                                            <option value="1">בטיפול</option>  
-                                            <option value="2">הושלם</option>  
-                                            <option value="3">נאסף</option>  
-                                        </select> </td>
-                                        <td class="centerTableTr">10/03/19</td>
-                                        <td class="centerTableTr">01/03/19</td>
-                                        <td class="centerTableTr">450₪</td>
-                                        <td class="centerTableTr">מנוע מקולקל</td>
-                                        <td class="centerTableTr">12345678</td>
-                                        <td class="centerTableTr">יוסי כהן</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                        <td class="centerTableTr">3</td>
-                                    </tr>
+                                    <?php
+
+                                        require_once('../php/Database.php');
+                                        global $db;
+                                        $db->query("SET CHARACTER SET 'hebrew'");
+                                        $db->query("SET NAMES 'utf8'");
+                                        $result = $db ->query('select * from repair r JOIN customers c ON r.customerId=c.customerId JOIN repairStatuses rs ON rs.customerId=c.customerId');
+                                        
+                                        //print_r($result);
+                                        //$result = $result->fetch_assoc();  //for testing
+                                        
+                                       while($row = $result->fetch_assoc()){
+                                           //print_r($row);
+                                         if ($row['repairStatus'] == 1){
+                                            echo '<tr>';
+                                            echo '<td> <button onclick="myFunctionToEdit()">&#x2705</button> </td>';
+                                                echo '<td class="centerTableTr">
+                                                     <select name=selectStatus>  
+                                                         <option value="1" selected>בטיפול</option>  
+                                                         <option value="2"> הושלם</option>  
+                                                         <option value="3">נאסף</option>  
+                                                     </select> </td>';
+                                                     
+                                           echo '<td class="centerTableTr">' .$row['estimateRepairDays'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['dateCreated'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['estimatePrice'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['repairDescription'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['customerId'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['firstName'] . " " . $row['lastName']. '</td>';
+                                          echo ' <td class="centerTableTr">' .$row['repairProductId'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['repairProductName'] .'</td>';
+                                       echo '</tr> ';
+                                        }
+                                       }
+                                    ?>
+
+                                    
 
                                 </tbody>
                             </table>
@@ -206,6 +185,53 @@
         </div>
     </div>
         <!-- End Footer area-->
+        
+        
+        
+        <script>
+            
+            var selectStatus = document.getElementById("selectStatus");
+            var estimateRepairDays = document.getElementById("estimateRepairDays");
+            var dateCreated = document.getElementById("dateCreated");
+            var estimatePrice = document.getElementById("estimatePrice");
+            var repairDescription = document.getElementById("repairDescription");
+            var customerId = document.getElementById("customerId");
+            var firstName = document.getElementById("firstName");
+            var repairProductId = document.getElementById("repairProductId");
+            var emailEdit = document.getElementById("emailEdit");
+            var xhr = new XMLHttpRequest(); 
+            xhr.open("GET", "../php/ajaxReq.php", true);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.onreadystatechange = function(){
+                //console.log('ready State: ' + xhr.readyState);
+                if(xhr.readyState < 4){
+                    address1.innerHTML = 'Loading..';
+                    city.innerHTML = 'Loading..';
+                    country.innerHTML = 'Loading..';
+                    phone.innerHTML = 'Loading..';
+                    fullName.innerHTML = 'Loading..';
+                    email.innerHTML = 'Loading..';
+                }
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    var json = JSON.parse(xhr.responseText);
+                    //console.log(json);
+                   // console.log(typeof json);
+                    address1.innerHTML = json.Address1;
+                    city.innerHTML = json.City;
+                    country.innerHTML = json.Country;
+                    phone.innerHTML = json.Phone;
+                    email.innerHTML = json.email;
+                    fullName.innerHTML = json.firstName +' ' + json.lastName;
+                    emailEdit.innerHTML = json.email;
+                    lastNameEdit.innerHTML = json.lastName;
+                    firstNameEdit.innerHTML = json.firstName;
+                    $('#address1Edit').attr('placeholder','');
+                    $('#address1Edit').attr('placeholder','New Text Here');
+                    window['city'] = json.City;
+                }
+            }
+            xhr.send();
+        </script>
         
 
         
