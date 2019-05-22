@@ -1,5 +1,4 @@
 <!doctype html>
-<link  rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <html class="no-js" lang="">
 
 <head>
@@ -36,8 +35,6 @@
     <link rel="stylesheet" href="../css/wave/waves.min.css">
     <!-- style CSS ============================================ -->
     <link rel="stylesheet" href="../css/style.css">
-        <!-- style CSS ============================================ -->
-    <link rel="stylesheet" href="../css/ourCss/style.css">
     <!-- responsive CSS	============================================ -->
     <link rel="stylesheet" href="../css/responsive.css">
     <!-- modernizr JS ============================================ -->
@@ -53,114 +50,115 @@
          <?php include "../php/menu.php" ?> 
     <!-- END Include for Menu-->
     
-    <!-- Form Element area Start-->
-    <div class="form-element-area">
+    <!-- Breadcomb area Start-->
+    <div class="breadcomb-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-element-list">
-                        <div class="basic-tb-hd">
-                            <h1 class="centerText">מכירה חדשה</h2><br>
-                            <h2 id="test">פרטי הלקוח</p>
-                        </div>
-                        <div class="cmp-tb-hd bcs-hd">
-                        </div>
+                    <div class="breadcomb-list">
                         <div class="row">
-                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        שם הלקוח<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        מספר טלפון<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        תעודת זהות<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                 </div>
-                </div>
-            </div>
-            
-             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-element-list mg-t-30">
-                        <div class="basic-tb-hd">
+                            <h2 style="text-align:center">תיקונים</h2>
                         </div>
                     </div>
                 </div>
             </div>
-
+        </div>
+    </div>
+    <!-- Breadcomb area End-->
+    
+        <!-- Search at Data Table Start-->
 <script>
-function addRowHandlers() {
-    var table = document.getElementById("data-table-basic");
-    var rows = table.getElementsByTagName("tr");
-    for (i = 1; i < rows.length; i++) {
-        var row = table.rows[i];
-        row.onclick = function(myrow){
-                          return function() { 
-                             var cell = myrow.getElementsByTagName("td")[0];
-                             var id = cell.innerHTML;
-                             alert("id:" + id);
-                      };
-                  }(row);
+    function isExistingCellStartWith(children, length, filter) {
+        let td;
+         for (child = 1; child < length; child++) {  
+             td = children[child];
+             if(td.innerHTML.toUpperCase().includes(filter)) {
+                 return true
+             }
+        }
+        return false;
     }
-}
-</script>
 
+    function myFunction() {
+      let input, filter, a, i, j, td, trs, child, table;
+      input = document.getElementById("mySearch");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("data-table-basic");
+      trs = table.getElementsByTagName("tr");
+      for (i = 1; i < trs.length; i++) {
+            if(isExistingCellStartWith(trs[i].children, trs[i].children.length, filter)) {
+                trs[i].style.display = "";
+            } else {
+                trs[i].style.display = "none";
+            }
+        }
+    }
+</script>
+<!-- Search at Data Table End-->
+    
 <!-- Data Table area Start-->
-<div class = "row">
     <div class="data-table-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2 style="text-align:center">מוצרים</h2>
+                            <h2 style="text-align:center">תיקונים שהושלמו</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="centerTableTr"></th>
-                                        <th class="centerTableTr">מחיר סה"כ</th>
-                                        <th class="centerTableTr">כמות</th>
-                                        <th class="centerTableTr">מחיר ליחידה</th>
-                                        <th class="centerTableTr">תקופת אחריות</th>
-                                        <th class="centerTableTr">ספק</th>
+                                        <th class="centerTableTr">שמור</th>
+                                        <th class="centerTableTr">סטטוס</th>
+                                        <th class="centerTableTr">מספר ימים משוער לתיקון</th>
+                                        <th class="centerTableTr">תאריך פתיחת טיפול</th>
+                                        <th class="centerTableTr">מחיר משוער</th>
+                                        <th class="centerTableTr">פירוט הבעיה</th>
+                                        <th class="centerTableTr">ת"ז לקוח</th>
+                                        <th class="centerTableTr">שם לקוח</th>
                                         <th class="centerTableTr">מק"ט</th>
                                         <th class="centerTableTr">שם המוצר</th>
-                                        <th><a href="javascript:void(0);" style="font-size:30px;" id="addMore" title="Add More Person"><span class="glyphicon glyphicon-plus"></span></a></th>
+                                        <th class="centerTableTr">מס' תיקון</th>
+                                        <input type="text" id="mySearch" onchange="myFunction()" placeholder="חפש תיקון" title="Type in a category">
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                    </tr>
-                            
+                                <?php
+
+                                        require_once('../php/Database.php');
+                                        global $db;
+                                        $db->query("SET CHARACTER SET 'hebrew'");
+                                        $db->query("SET NAMES 'utf8'");
+                                        $result = $db ->query('select * from repair r JOIN customers c ON r.customerId=c.customerId JOIN repairStatuses rs ON rs.customerId=c.customerId');
+                                        
+                                        //print_r($result);
+                                        //$result = $result->fetch_assoc();  //for testing
+                                        
+                                       while($row = $result->fetch_assoc()){
+                                           //print_r($row);
+                                         if ($row['repairStatus'] == 2){
+                                            echo '<tr>';
+                                            echo '<td> <button onclick="myFunction()">&#x2705</button> </td>';
+                                                echo '<td class="centerTableTr">
+                                                     <select name=selectStatus>  
+                                                         <option value="1">בטיפול</option>  
+                                                         <option value="2" selected> הושלם</option>  
+                                                         <option value="3">נאסף</option>  
+                                                     </select> </td>';
+                                            
+                                           echo '<td class="centerTableTr">' .$row['estimateRepairDays'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['dateCreated'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['estimatePrice'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['repairDescription'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['customerId'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['firstName'] . " " . $row['lastName']. '</td>';
+                                          echo ' <td class="centerTableTr">' .$row['repairProductId'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['repairProductName'] .'</td>';
+                                       echo '</tr> ';
+                                        }
+                                       }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -169,87 +167,8 @@ function addRowHandlers() {
             </div>
         </div>
     </div>
-    </div>
+    <!-- Data Table area End-->
     
-<!-- Data Table area End-->
-    
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-element-list mg-t-30">
-                        <div class="cmp-tb-hd">
-
-                            <h2 class="centerText">פרטי המכירה </p>
-                        </div>
-                        <div class="row">
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        סכום המוצרים<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        הנחה<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                      מע"מ<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        סה"כ<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        הערות<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                <input class="marginAndFloat" type="submit" value="אישור">
-                <input class="marginAndFloat" type="submit" value="הדפס">
-                <input class="marginAndFloat" type="submit" value="שמור כקובץ"><br>
-                     
-                    </div>
-                </div>
-            </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-    <!-- Form Element area End-->
-    <!-- Datepicker area Start-->
-    <!-- Datepicker area End-->
-    <!-- Color Picker area Start-->
-    <!-- Color Picker area End-->
-    <!-- Summernote area Start-->
-    <!-- Summernote area End-->
-    <!-- Dropzone area Start-->
-    <!-- Dropzone area End-->
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -262,7 +181,11 @@ function addRowHandlers() {
             </div>
         </div>
     </div>
-    <!-- End Footer area-->
+        <!-- End Footer area-->
+        
+
+        
+        
     <!-- jquery ============================================ -->
     <script src="../js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS ============================================ -->
@@ -316,28 +239,5 @@ function addRowHandlers() {
     <script src="../js/main.js"></script>
 
 </body>
-
-<!--- START SCRIPT TO ADD ROW IN TABLE-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
-<script>
-$(function(){
-    $('#addMore').on('click', function() {
-              var data = $("#data-table-basic tr:eq(1)").clone(true).appendTo("#data-table-basic");
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove', function() {
-         var trIndex = $(this).closest("tr").index();
-            if(trIndex>0) {
-             $(this).closest("tr").remove();
-           } else {
-             alert("Sorry!! Can't remove first row!");
-           }
-      });
-});      
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
-<!--- END SCRIPT TO ADD ROW IN TABLE-->
 
 </html>
