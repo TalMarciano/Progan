@@ -72,7 +72,7 @@
         let td;
          for (child = 1; child < length; child++) {  
              td = children[child];
-             if(td.innerHTML.toUpperCase().startsWith(filter)) {
+             if(td.innerHTML.toUpperCase().includes(filter)) {
                  return true
              }
         }
@@ -110,64 +110,62 @@
                                 <thead>
                                     <tr>
                                         <th class="centerTableTr">שמור</th>
+                                        <th class="centerTableTr">סטטוס</th>
+                                        <th class="centerTableTr">מחיר משוער</th>
+                                        <th class="centerTableTr">הערות</th>
                                         <th class="centerTableTr">תאריך סיום משוער</th>
                                         <th class="centerTableTr">תאריך תחילת השכרה</th>
-                                        <th class="centerTableTr">מחיר ליום</th>
-                                        <th class="centerTableTr">ת"ז לקוח</th>
+                                        <th class="centerTableTr">פלאפון לקוח</th>
                                         <th class="centerTableTr">שם לקוח</th>
-                                        <th class="centerTableTr">שם הספק</th>
+                                        <th class="centerTableTr">שם מוצר</th>
                                         <th class="centerTableTr">מק"ט</th>
-                                        <th class="centerTableTr">שם המוצר</th>
                                         <th class="centerTableTr">מס' השכרה</th>
                                         <input type="text" id="mySearch" onchange="myFunction()" placeholder="חפש השכרה" title="Type in a category">
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-                                    <?php
-                                        require_once('../php/Database.php');
-                                        global $db; 
-                                        $result = $db->query('select * from userpassword');
-                                        var_dump($result->fetch_assoc());
-                                       
-                                    ?>
                                     <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">10/2/19</td>
-                                        <td class="centerTableTr">1/2/19</td>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">12345678</td>
-                                        <td class="centerTableTr">יוסי כהן</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                        <td class="centerTableTr">1</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">10/2/19</td>
-                                        <td class="centerTableTr">1/2/19</td>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">12345678</td>
-                                        <td class="centerTableTr">יוסי כהן</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                        <td class="centerTableTr">1</td
-                                    </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">10/2/19</td>
-                                        <td class="centerTableTr">1/2/19</td>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">12345678</td>
-                                        <td class="centerTableTr">יוסי כהן</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                        <td class="centerTableTr">1</td
-                                    </tr>
+                                         <?php
 
+                                        require_once('../php/Database.php');
+                                        global $db;
+                                        $db->query("SET CHARACTER SET 'hebrew'");
+                                        $db->query("SET NAMES 'utf8'");
+                                        $sql ="SELECT * FROM rents r JOIN rentInventory ri ON r.productId = ri.productId";
+                                        $result = $db ->query($sql);
+
+                                        
+                                        
+                                        while($row = $result->fetch_assoc()){
+                                           //print_r($row);
+                                         if ($row['rentStatusId'] == 1){
+                                            echo '<tr>';
+                                            echo '<td> <button onclick="myFunction()">&#x2705</button> </td>';
+                                                echo '<td class="centerTableTr">
+                                                     <select name=selectStatus>  
+                                                         <option value="1" selected>מושכר</option>  
+                                                         <option value="2"> הוחזר</option>  
+                                                     </select> </td>';
+                                            
+
+                                           echo '<td class="centerTableTr">' .$row['totalPrice'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['comments'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['endDate'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['datecreated'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['phone'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['firstName'] . " " . $row['lastName']. '</td>';
+                                          echo ' <td class="centerTableTr">' .$row['nameProduct'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['productId'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['rentId'] .'</td>';
+                                          
+
+
+                                       echo '</tr> ';
+                                        }
+                                       }
+                                    ?>
+                                         
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
