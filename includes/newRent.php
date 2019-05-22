@@ -55,6 +55,7 @@
     
    
     <!-- Form Element area Start-->
+    <form method="POST" action="">
     <div class="form-element-area">
         <div class="container">
             <div class="row">
@@ -72,7 +73,7 @@
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        שם הלקוח<input type="text" class="form-control">
+                                        שם פרטי<input type="text" name="firstName" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +82,7 @@
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        מספר טלפון<input type="text" class="form-control">
+                                        שם משפחה<input type="text" name="lastName" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +91,25 @@
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        תעודת זהות<input type="text" class="form-control">
+                                        מספר טלפון<input type="tel" name="phone"  class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                              <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group ic-cmp-int float-lb floating-lb">
+                                    <div class="form-ic-cmp">
+                                    </div>
+                                    <div class="nk-int-st">
+                                        אימייל<input type="email" name="email" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group ic-cmp-int float-lb floating-lb">
+                                    <div class="form-ic-cmp">
+                                    </div>
+                                    <div class="nk-int-st">
+                                        תעודת זהות<input type="text" name= "id" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -122,22 +141,22 @@
                                 <thead>
                                     <tr>
                                         <th class="centerTableTr"></th>
-                                        <th class="centerTableTr">תאריך החזרה משוער</th>
-                                        <th class="centerTableTr">מחיר ליום</th>
-                                        <th class="centerTableTr">ספק</th>
-                                        <th class="centerTableTr">מק"ט</th>
-                                        <th class="centerTableTr">שם המוצר</th>
+                                        <th class="centerTableTr" > תאריך החזרה משוער</th>
+                                        <th class="centerTableTr"  > מחיר ליום</th>
+                                        <th class="centerTableTr" >ספק</th>
+                                        <th class="centerTableTr" >מק"ט</th>
+                                        <th class="centerTableTr" >שם המוצר</th>
                                         <th><a href="javascript:void(0);" style="font-size:30px;" id="addMore" title="Add More Person"><span class="glyphicon glyphicon-plus"></span></a></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
+                                        <td> <input type="text" name= "endDate" class="form-control"></td>
+                                        <td> <input type="text" name= "priceD" class="form-control"></td>
+                                        <td> <input type="text" name= "vendor" class="form-control"></td>
+                                        <td> <input type="text" name= "productId" class="form-control"></td>
+                                        <td> <input type="text" name= "nameProduct" class="form-control"></td>
                                         
                                     </tr>
                                 </tbody>
@@ -164,43 +183,17 @@
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        מחיר כולל להשכרה<input type="text" class="form-control">
+                                        מחיר כולל משוער<input type="text" name="totalPrice" class="form-control">
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group ic-cmp-int float-lb floating-lb">
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        הנחה<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                      מע"מ<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        סה"כ<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        הערות<input type="text" class="form-control">
+                                        הערות<input type="text" name="comments" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -228,6 +221,66 @@
             
         </div>
     </div>
+    </form>
+    
+    <?php
+    require_once('../php/Database.php');
+    global $db;
+    $db->query("SET CHARACTER SET 'hebrew'");
+    $db->query("SET NAMES 'utf8'");
+		        if(!$db->get_connection()){
+                    die("Connection failed!");
+		        }
+		        else{
+               //     $rentId = filter_input(INPUT_POST, 'rentId'); 
+                    $productId = filter_input(INPUT_POST, 'productId'); 
+                    $productName = filter_input(INPUT_POST, 'productName');
+                    $firstName = filter_input(INPUT_POST, 'firstName');
+                    $lastName = filter_input(INPUT_POST, 'lastName');
+                    $phone = filter_input(INPUT_POST, 'phone');
+                    $email = filter_input(INPUT_POST, 'email');
+                    $id = filter_input(INPUT_POST, 'id');
+                    $endDate = filter_input(INPUT_POST, 'endDate');
+                    $priceD = filter_input(INPUT_POST, 'priceD');
+                    $vendor = filter_input(INPUT_POST, 'vendor');
+                    $productId = filter_input(INPUT_POST, 'productId');
+                    $nameProduct = filter_input(INPUT_POST, 'nameProduct');
+                    $totalPrice = filter_input(INPUT_POST, 'totalPrice');
+                    $comments = filter_input(INPUT_POST, 'comments');
+
+
+           /*         if(User::checkUserName($email)){
+        		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Email is invalid.', 'error')</script>";
+                    }
+          
+                    else if(User::checkNameAndLastName($firstName, $lastName)){
+        		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Name or Last name is invalid.', 'error')</script>";
+                    }
+*/
+               //    else{
+                        $sql = "INSERT INTO rents(firstName, lastName, phone, email, id, endDate, priceD, vendor, productId, nameProduct, totalPrice, comments, datecreated, rentStatusId) 
+                        values ('" .$firstName ."','".$lastName."','" .$phone ."', '".$email ."'," .$id .",'" .$endDate."',".$priceD .",'" .$vendor ."'," .$productId .",'".$nameProduct ."'," .$totalPrice 
+                        .",'" .$comments ."',now(),1)";
+                        echo $sql; 
+                        $result = $db->query($sql);
+	                	Print_r ($result);
+                        if(!$result ){
+                            global $errorAddedUser;
+                            $errorAddedUser = TRUE;
+                            $invalidRegister = TRUE;
+                        }
+                        else{
+                            $invalidRegister = FALSE;
+                            global $userAddedSucessfuly;
+                            $userAddedSucessfuly = TRUE;
+                    }
+                }
+
+    
+    ?>
+    
+    
+    
     <!-- Form Element area End-->
     <!-- Datepicker area Start-->
     <!-- Datepicker area End-->
@@ -251,13 +304,11 @@
     </div>
     <!-- End Footer area-->
     <!-- jquery ============================================ -->
-    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <!-- bootstrap JS ============================================ -->
     <script src="../js/bootstrap.min.js"></script>
     <!-- wow JS ============================================ -->
     <script src="../js/wow.min.js"></script>
-    <!-- price-slider JS ============================================ -->
-    <script src="js/jquery-price-slider.js"></script>
     <!-- owl.carousel JS ============================================ -->
     <script src="../js/owl.carousel.min.js"></script>
     <!-- scrollUp JS ============================================ -->
@@ -269,7 +320,7 @@
     <script src="../js/counterup/waypoints.min.js"></script>
     <script src="../js/counterup/counterup-active.js"></script>
     <!-- mCustomScrollbar JS ============================================ -->
-    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    
     <!-- jvectormap JS ============================================ -->
     <script src="../js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="../js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
