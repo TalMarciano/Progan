@@ -41,6 +41,15 @@
     <link rel="stylesheet" href="../css/responsive.css">
     <!-- modernizr JS ============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Modal ============================================ -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+    <!-- Modal ============================================ -->
+
 </head>
 
 <body>
@@ -69,33 +78,33 @@
     <!-- Breadcomb area End-->
     
     <!-- Search at Data Table Start-->
-<script>
-    function isExistingCellStartWith(children, length, filter) {
-        let td;
-         for (child = 1; child < length; child++) {  
-             td = children[child];
-             if(td.innerHTML.toUpperCase().startsWith(filter)) {
-                 return true
-             }
+    <script>
+        function isExistingCellStartWith(children, length, filter) {
+            let td;
+             for (child = 1; child < length; child++) {  
+                 td = children[child];
+                 if(td.innerHTML.toUpperCase().includes(filter)) {
+                     return true
+                 }
+            }
+            return false;
         }
-        return false;
-    }
-
-    function myFunction() {
-      let input, filter, a, i, j, td, trs, child, table;
-      input = document.getElementById("mySearch");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("data-table-basic");
-      trs = table.getElementsByTagName("tr");
-      for (i = 1; i < trs.length; i++) {
-            if(isExistingCellStartWith(trs[i].children, trs[i].children.length, filter)) {
-                trs[i].style.display = "";
-            } else {
-                trs[i].style.display = "none";
+    
+        function myFunction() {
+          let input, filter, a, i, j, td, trs, child, table;
+          input = document.getElementById("mySearch");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("data-table-basic");
+          trs = table.getElementsByTagName("tr");
+          for (i = 1; i < trs.length; i++) {
+                if(isExistingCellStartWith(trs[i].children, trs[i].children.length, filter)) {
+                    trs[i].style.display = "";
+                } else {
+                    trs[i].style.display = "none";
+                }
             }
         }
-    }
-</script>
+    </script>
 <!-- Search at Data Table End-->
 
 <!-- Data Table area Start-->
@@ -110,82 +119,85 @@
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="centerTableTr">שמור</th>
-                                        <th class="centerTableTr">מחיר מכירה</th>
-                                        <th class="centerTableTr">מחיר עלות</th>
-                                        <th class="centerTableTr">תקופת אחריות</th>
-                                        <th class="centerTableTr">כמות</th>
-                                        <th class="centerTableTr">תיאור המוצר</th>
-                                        <th class="centerTableTr">שם הספק</th>
-                                        <th class="centerTableTr">מק"ט</th>
-                                        <th class="centerTableTr">שם המוצר</th>
-                                        <input type="text" id="mySearch" onchange="myFunction()" placeholder="חפש תיקון" title="Type in a category">
+                                        <th class="centerTableTr">פרטי המכירה</th>
+                                        <th class="centerTableTr">נוצר בתאריך </th>
+                                        <th class="centerTableTr">מחיר כולל</th>
+                                        <th class="centerTableTr">שם הלקוח</th>
+                                        <th class="centerTableTr">מספר מכירה</th>
+                                        <input type="text" id="mySearch" onchange="myFunction()" placeholder="חפש מכירה " title="Type in a category">
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">London</td>
-                                        <td class="centerTableTr">47</td>
-                                        <td class="centerTableTr">2011/03/21</td>
-                                        <td class="centerTableTr">$356,250</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">London</td>
-                                        <td class="centerTableTr">21</td>
-                                        <td class="centerTableTr">2009/02/27</td>
-                                        <td class="centerTableTr">$103,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">San Francisco</td>
-                                        <td class="centerTableTr">30</td>
-                                        <td class="centerTableTr">2010/07/14</td>
-                                        <td class="centerTableTr">$86,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">Edinburgh</td>
-                                        <td class="centerTableTr">51</td>
-                                        <td class="centerTableTr">2008/11/13</td>
-                                        <td class="centerTableTr">$183,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">Singapore</td>
-                                        <td class="centerTableTr">29</td>
-                                        <td class="centerTableTr">2011/06/27</td>
-                                        <td class="centerTableTr">$183,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <button onclick="myFunction()">&#x2705</button> </td>
-                                        <td class="centerTableTr">New York</td>
-                                        <td class="centerTableTr">27</td>
-                                        <td class="centerTableTr">2011/01/25</td>
-                                        <td class="centerTableTr">$112,000</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th class="centerTableTr">Office</th>
-                                        <th class="centerTableTr">Age</th>
-                                        <th class="centerTableTr">Start date</th>
-                                        <th class="centerTableTr">Salary</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                      <?php
+                                        require_once('../php/Database.php');
+                                        global $db;
+                                        $db->query("SET CHARACTER SET 'hebrew'");
+                                        $db->query("SET NAMES 'utf8'");
+                                        $sql = "select * from orders o JOIN customers oc ON o.customerEmail=oc.email";
+                                        $result = $db ->query($sql);
+                                        while($row = $result->fetch_assoc()){
+                                            echo '<tr>';
+                                            echo '<td> <a  data-toggle="modal" href="#'  .$row['orderid']  .'"> check </a></td>';
+                                            echo ' <td class="centerTableTr">' .$row['dateCreated'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$row['totalOrderPrice'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$row['firstName'].' '.$row['lastName'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$row['orderid'] .'</td>';
+                                            echo '</tr> ';
+                                        }
+                                        echo '</tbody></table></div></div></div></div></div></div>';
+                                        $result2 = $db ->query($sql);
+                                        while($row = $result2->fetch_assoc()){
+                                        ///////////MODAL//////////////////////////////
+                                                echo '<!-- Modal: modalOrder -->';
+                                                echo '<div class="modal fade" id="' .$row['orderid'] .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+                                                  echo '<div class="modal-dialog" role="document">';
+                                                    echo '<div class="modal-content">';
+                                                      echo '<!--Header-->';
+                                                       echo '<h4 class="modal-title" style="text-align:center;" id="myModalLabel">';
+                                                         echo $row['orderid'] .'<br>' .$row['firstName'] .' ' .$row['lastName'] .'<br>' .$row['customerEmail'] .'</h4>';
+                                                         echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                                                     echo '<!--Body-->';
+                                                      echo '<div class="modal-body">';
+                                                        echo '<table class="table table-hover">';
+                                                          echo '<thead>';
+                                                            echo '<tr>';
+                                                            echo '<th>כמות</th>';
+                                                              echo '<th>מחיר</th>';
+                                                              echo '<th>קוד מוצר</th>';
+                                                              echo '<th>שם מוצר</th>';
+                                                              echo '<th>#</th>';
+                                                            echo '</tr>';
+                                                          echo '</thead>';
+                                                          echo '<tbody>';
+                                                          $orderQuery = "select * from orders o JOIN orderProducts op ON op.orderId=o.orderid Join products p on p.productid = op.productId where o.orderid = " .$row['orderid'];
+                                                          $odetails = $db->query($orderQuery);
+                                                          $productCounter = 0;
+                                                          while ($orderDetail = $odetails->fetch_assoc()){
+                                                            echo '<tr>';
+                                                              echo '<th scope="row">' .$orderDetail['quantity'] .'</th>';
+                                                              echo '<th>' .$orderDetail['totalPrice'] .'</th>';
+                                                              echo '<th>' .$orderDetail['productId'] .'</th>';
+                                                              echo '<th>' .$orderDetail['productName'] .'</th>';
+                                                              echo '<td>' .$productCounter + 1 .'</td>';
+                                                            echo '</tr>';
+                                                            $productCounter += 1;
+                                                          }
+                                                          echo '</tbody>';
+                                                        echo '</table>';
+                                                      echo '</div>';
+                                                      echo '<h4 style="text-align:center;" class="modal-title">מחיר סופי ';
+                                                        echo '<span>' .$row['totalOrderPrice'] .'</span>';
+                                                      echo '</h4>';
+                                                      echo '<!--Footer-->';
+                                                      echo '<div class="modal-footer">';
+                                                 			  echo '<button style="margin:auto" type="button" class="btn btn-outline-primary" data-dismiss="modal">סגור</button>';
+                                                      echo '</div></div></div></div><!-- Modal: modalCart -->';
+                                              //////////////////////////////////////// 
+                                        }
+                                        ?>
+
     <!-- Data Table area End-->
-
-
-
-
+   
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -199,6 +211,16 @@
         </div>
     </div>
     <!-- End Footer area-->
+    <!-- Modal ============================================ -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/js/mdb.min.js"></script>
+    <!-- Modal ============================================ -->
     <!-- jquery ============================================ -->
     <script src="../js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS ============================================ -->
@@ -250,6 +272,7 @@
     <script src="../js/plugins.js"></script>
     <!-- main JS ============================================ -->
     <script src="../js/main.js"></script>
+    
 
 </body>
 
