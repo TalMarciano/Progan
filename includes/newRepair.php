@@ -1,6 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="">
 <link  rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
@@ -53,8 +53,8 @@
          <?php include "../php/menu.php" ?> 
     <!-- END Include for Menu-->
     
-   
     <!-- Form Element area Start-->
+    <form method="POST" action="">
     <div class="form-element-area">
         <div class="container">
             <div class="row">
@@ -72,7 +72,7 @@
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        שם הלקוח<input type="text" class="form-control">
+                                        שם פרטי<input type="text" name = "firstName" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        מספר טלפון<input type="text" class="form-control">
+                                        שם משפחה<input type="text" name = "lastName" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,25 @@
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        תעודת זהות<input type="text" class="form-control">
+                                        מספר טלפון<input type="text" name = "phone"  class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group ic-cmp-int float-lb floating-lb">
+                                    <div class="form-ic-cmp">
+                                    </div>
+                                    <div class="nk-int-st">
+                                        אי-מייל <input type="text" name = "customerEmail"  class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group ic-cmp-int float-lb floating-lb">
+                                    <div class="form-ic-cmp">
+                                    </div>
+                                    <div class="nk-int-st">
+                                        תעודת זהות<input type="text" name = "customerId" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -98,6 +116,7 @@
                  </div>
                 </div>
             </div>
+            
              <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-element-list mg-t-30">
@@ -107,6 +126,23 @@
                 </div>
             </div>
 
+<script>
+function addRowHandlers() {
+    var table = document.getElementById("data-table-basic");
+    var rows = table.getElementsByTagName("tr");
+    for (i = 1; i < rows.length; i++) {
+        var row = table.rows[i];
+        row.onclick = function(myrow){
+                          return function() { 
+                             var cell = myrow.getElementsByTagName("td")[0];
+                             var id = cell.innerHTML;
+                             alert("id:" + id);
+                      };
+                  }(row);
+    }
+}
+</script>
+
 <!-- Data Table area Start-->
 <div class = "row">
     <div class="data-table-area">
@@ -115,30 +151,31 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2 style="text-align:center">פרטי המוצר</h2>
+                            <h2 style="text-align:center">מוצרים</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="centerTableTr">תאריך סיום משוער</th>
-                                        <th class="centerTableTr">מחיר משוער</th>
-                                        <th class="centerTableTr">פירוט הבעיה</th>
-                                        <th class="centerTableTr">ספק</th>
-                                        <th class="centerTableTr">מק"ט</th>
-                                        <th class="centerTableTr">שם המוצר</th>
+                                        <th class="centerTableTr"></th>
+                                        <th class="centerTableTr" >מספר ימים משוער לתיקון</th>
+                                        <th class="centerTableTr" >מחיר משוער</th>
+                                        <th class="centerTableTr" >פירוט הבעיה</th>
+                                        <th class="centerTableTr" >מק"ט</th>
+                                        <th class="centerTableTr" >שם המוצר</th>
                                         <th><a href="javascript:void(0);" style="font-size:30px;" id="addMore" title="Add More Person"><span class="glyphicon glyphicon-plus"></span></a></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
-                                        <td <div> <input type="text" class="form-control"> </div> </div> </div> </td>
+                                        <td><input type="text" class="form-control" name="estimateRepairDays"></td>
+                                        <td><input type="text" class="form-control" name="estimatePrice"></td>
+                                        <td><input type="text" class="form-control" name="repairDescription"></td>
+                                        <td><input type="text" class="form-control" name="repairProductId"></td>
+                                        <td><input type="text" class="form-control" name="repairProductName"></td>
                                     </tr>
+                            
                                 </tbody>
                             </table>
                         </div>
@@ -148,7 +185,8 @@
         </div>
     </div>
     </div>
-    <!-- Data Table area End-->
+    
+<!-- Data Table area End-->
     
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -163,59 +201,22 @@
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        מחיר לתיקון<input type="text" class="form-control">
+                                        סה"כ מחיר לתיקון<input type="text" name="totalPriceRepair" class="form-control">
                                     </div>
                                 </div>
                             </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                             <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group ic-cmp-int float-lb floating-lb">
                                     <div class="form-ic-cmp">
                                     </div>
                                     <div class="nk-int-st">
-                                        הנחה<input type="text" class="form-control">
+                                        הערות<input type="text" name="repairComment" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                      מע"מ<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        סה"כ<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        הערות<input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                             <div class="form-element-list mg-t-30">
-                              <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             </div>
                         </div>
-                    </div>
-                </div>
-                            
-                        </div>
-                <input class="marginAndFloat" type="submit" value="אישור">
-                <input class="marginAndFloat" type="submit" value="הדפס">
-                <input class="marginAndFloat" type="submit" value="שמור כקובץ"><br>
+                        <br>
+                <input class="marginAndFloat" type="submit" value="שמור תיקון" name="addRepair">
                      
                     </div>
                 </div>
@@ -226,6 +227,7 @@
             
         </div>
     </div>
+    </form>
     <!-- Form Element area End-->
     <!-- Datepicker area Start-->
     <!-- Datepicker area End-->
@@ -235,6 +237,96 @@
     <!-- Summernote area End-->
     <!-- Dropzone area Start-->
     <!-- Dropzone area End-->
+    
+<?php
+      if($_POST['addRepair']){
+            require_once('../php/Database.php');
+            global $db;
+            $db->query("SET CHARACTER SET 'hebrew'");
+            $db->query("SET NAMES 'utf8'");
+            if(!$db->get_connection()){
+                die("Connection failed!");
+            }
+            else{
+                $firstName = filter_input(INPUT_POST, 'firstName'); 
+                $lastName = filter_input(INPUT_POST, 'lastName'); 
+                $phone = filter_input(INPUT_POST, 'phone');
+                $customerEmail = filter_input(INPUT_POST, 'customerEmail');
+                $customerId = filter_input(INPUT_POST, 'customerId');
+                $repairProductName = filter_input(INPUT_POST, 'repairProductName');
+                $repairProductId = filter_input(INPUT_POST, 'repairProductId');
+                $repairDescription = filter_input(INPUT_POST, 'repairDescription');
+                $estimatePrice = filter_input(INPUT_POST, 'estimatePrice');
+                $estimateRepairDays = filter_input(INPUT_POST, 'estimateRepairDays');
+                $totalPriceRepair = filter_input(INPUT_POST, 'totalPriceRepair');
+                $repairComment = filter_input(INPUT_POST, 'repairComment');
+                $repairStatusId = filter_input(INPUT_POST, '1');
+                /*if(User::checkUserName($email)){
+    		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Email is invalid.', 'error')</script>";
+                }
+      
+                else if(User::checkNameAndLastName($firstName, $lastName)){
+    		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Name or Last name is invalid.', 'error')</script>";
+                }
+    
+               else{*/
+                    //$repairid = $db->query("SELECT orderid FROM orders ORDER BY orderid DESC LIMIT 0, 1");
+                    //echo $orderid['orderid'];
+                    
+                    $sql1 = "INSERT INTO customers(firstName, lastName, phone, email, customerId, dateCreated) 
+                    values ('" .$firstName ."','" .$lastName ."','" .$phone ."','" .$customerEmail ."','" .$customerId ."', now())";
+                    echo $sql1 .' This is after sql query '; 
+                    $result1 = $db->query($sql1);
+                   	Print_r ($result1); 
+                   	$sql2 = "INSERT INTO repair(repairProductName, repairProductId, repairDescription, estimatePrice, estimateRepairDays, totalPriceRepair, repairComment, customerId, dateCreated) 
+                    values ('".$repairProductName ."'," .$repairProductId. ",'".$repairDescription."',".$estimatePrice.", ".$estimateRepairDays.", ".$totalPriceRepair.", '".$repairComment."', '" .$customerId ."', now())";
+                    echo $sql2; 
+                    $result2 = $db->query($sql2);
+                   	Print_r ($result2); 
+                   	$sql3 = "INSERT INTO repairStatuses(repairStatus, customerId, productId) 
+                    values ('1','".$customerId."','".$repairProductId."')";
+                    echo $sql3; 
+                    $result3 = $db->query($sql3);
+                   	Print_r ($result3); 
+            
+                    if(!$result1 || !$result2 || !$result3){
+                        global $errorAddedUser;
+                        $errorAddedUser = TRUE;
+                        $invalidRegister = TRUE;
+                    }
+                    else{
+                        $invalidRegister = FALSE;
+                        global $userAddedSucessfuly;
+                        $userAddedSucessfuly = TRUE;
+                       // echo '<meta http-equiv="refresh" content="0">'; //for reload page
+                }
+                
+              /*  while($row = $result3->fetch_assoc()){
+                                            echo '<tr>';
+                                            if ($row['repairStatus'] == 1){
+                                                echo '<td class="centerTableTr">בטיפול</td>';
+                                            }
+                                            else if ($row['repairStatus'] == 2){
+                                                echo '<td class="centerTableTr">הושלם</td>'
+                                            }
+                                            else{
+                                                    echo '<td class="centerTableTr">נאסף</td>';
+
+                                            }
+                                           echo '<td class="centerTableTr">' .$row['email'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['userName'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['lastName'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['firstName'] .'</td>';
+                                       echo '</tr> ';
+                                        }*/
+                                        
+          } 
+            }
+      //}
+      
+
+          
+?>
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -321,6 +413,10 @@ $(function(){
       });
 });      
 </script>
-<!---END SCRIPT TO ADD ROW IN TABLE-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+<!--- END SCRIPT TO ADD ROW IN TABLE-->
 
 </html>
+
+
