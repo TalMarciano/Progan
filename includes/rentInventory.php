@@ -1,5 +1,4 @@
-<!doctype html>
-<html class="no-js" lang="">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -7,6 +6,7 @@
     <title>Progan Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../css/ourCss/style.css" rel="stylesheet">
     <!-- Google Fonts ============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS ============================================ -->
@@ -72,7 +72,7 @@
         let td;
          for (child = 1; child < length; child++) {  
              td = children[child];
-             if(td.innerHTML.toUpperCase().startsWith(filter)) {
+             if(td.innerHTML.toUpperCase().includes(filter)) {
                  return true
              }
         }
@@ -95,6 +95,10 @@
     }
 </script>
 <!-- Search at Data Table End-->
+
+
+
+    
     
 <!-- Data Table area Start-->
     <div class="data-table-area">
@@ -107,6 +111,49 @@
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
+                                    
+        
+<!-- Button trigger modal -->
+<span class="buttonMargin" class= "textRight">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+הוספת מוצר חדש
+</button>
+</span>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            
+            <h3 class="modal-title" id="exampleModalLabel" style="text-align:center" >
+                הוספת מוצר חדש
+                </h3>
+          </div>
+          <div class="modal-body">
+            <form method="POST" class="formRight">
+            
+            <p> <input type="text" name="productName"> &nbsp; :שם מוצר </p>
+            <p> <input type="text" name="productId" > &nbsp; :מק"ט</p>
+            <p> <input type="text" name="vendor" > &nbsp; :ספק </p>
+            <p> <input type="text" name="productDescription" > &nbsp; :תיאור מוצר </p>
+            <p> <input type="text" name="unit" > &nbsp; :יח' זמינות להשכרה </p>
+            <p> <input type="text" name="priceD" > &nbsp; :מחיר השכרה ליום </p>
+
+            </div>
+          <div class="modal-footer">
+            <input type="button" value="סגור" data-dismiss="modal">
+            <input type="submit" value="שמור" name="register" >
+          </div>
+        </form>
+     </div>
+      </div>
+    </div>
+     
+    
                                 <thead>
                                     <tr>
                                         <th class="centerTableTr">מחיר השכרה ליום</th>
@@ -120,53 +167,31 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">2</td>
-                                        <td class="centerTableTr">נפח מנוע 25 סמ"ק; משקל: 5.4 ק"ג</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
+                                        <?php
+
+                                        require_once('../php/Database.php');
+                                        global $db;
+                                        $db->query("SET CHARACTER SET 'hebrew'");
+                                        $db->query("SET NAMES 'utf8'");
+                                        $result = $db ->query('select * from rentInventory');
+                                        
+                                        //print_r($result);
+                                        //$result = $result->fetch_assoc();  //for testing
+                                        
+                                        
+                                        while($row = $result->fetch_assoc()){
+                                            echo '<tr>';
+                                            echo '<td class="centerTableTr">' .$row['priceDay'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$row['unit'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$row['productDescription'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$row['vendor'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$row['productId'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$row['productName'] .'</td>';
+                                       echo '</tr> ';
+                                        }
+                                    ?>
                                     </tr>
-                                    <tr>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">2</td>
-                                        <td class="centerTableTr">נפח מנוע 25 סמ"ק; משקל: 5.4 ק"ג</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">2</td>
-                                        <td class="centerTableTr">נפח מנוע 25 סמ"ק; משקל: 5.4 ק"ג</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">2</td>
-                                        <td class="centerTableTr">נפח מנוע 25 סמ"ק; משקל: 5.4 ק"ג</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">2</td>
-                                        <td class="centerTableTr">נפח מנוע 25 סמ"ק; משקל: 5.4 ק"ג</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="centerTableTr">120₪</td>
-                                        <td class="centerTableTr">2</td>
-                                        <td class="centerTableTr">נפח מנוע 25 סמ"ק; משקל: 5.4 ק"ג</td>
-                                        <td class="centerTableTr">KAWASAKI</td>
-                                        <td class="centerTableTr">582267</td>
-                                        <td class="centerTableTr">JK27 חרמש</td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -176,6 +201,64 @@
         </div>
     </div>
     <!-- Data Table area End-->
+    
+    
+     
+          
+        <?php
+        require_once('../php/Database.php');
+    global $db;
+    $db->query("SET CHARACTER SET 'hebrew'");
+    $db->query("SET NAMES 'utf8'");
+		        if(!$db->get_connection()){
+                    die("Connection failed!");
+		        }
+		        else{
+               //     $rentId = filter_input(INPUT_POST, 'rentId'); 
+                    $productId = filter_input(INPUT_POST, 'productId'); 
+                    $productName = filter_input(INPUT_POST, 'productName');
+                    $priceD = filter_input(INPUT_POST, 'priceDay');
+                    $vendor = filter_input(INPUT_POST, 'vendor');
+                    $productDescription = filter_input(INPUT_POST, 'productDescription');
+                    $unit = filter_input(INPUT_POST, 'unit');
+
+
+           /*         if(User::checkUserName($email)){
+        		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Email is invalid.', 'error')</script>";
+                    }
+          
+                    else if(User::checkNameAndLastName($firstName, $lastName)){
+        		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Name or Last name is invalid.', 'error')</script>";
+                    }
+*/
+               //    else{
+                        $sql = "INSERT INTO rentInventory(productName, productId, vendor, productDescription, unit, priceDay) 
+                        values ('" .$productName ."','" .$productId ."', '".$vendor ."','" .$productDescription."',".$unit ."," .$priceDay .")";
+                        echo $sql; 
+                        $result = $db->query($sql);
+	                	Print_r ($result);
+                        if(!$result ){
+                            global $errorAddedUser;
+                            $errorAddedUser = TRUE;
+                            $invalidRegister = TRUE;
+                        }
+                        else{
+                            $invalidRegister = FALSE;
+                            global $userAddedSucessfuly;
+                            $userAddedSucessfuly = TRUE;
+                    }
+                }
+
+    
+    ?>
+    
+    
+    
+    
+    
+    
+    
+    
     
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
