@@ -1,4 +1,7 @@
-<!doctype html>
+<?php
+    session_start();
+?>
+<!DOCTYPE html>
 <html class="no-js" lang="">
 
 <head>
@@ -7,6 +10,8 @@
     <title>Progan Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- OUR CSS ============================================ -->
+    <link rel="stylesheet" href="../css/ourCss/style.css">
     <!-- Google Fonts ============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS ============================================ -->
@@ -23,8 +28,6 @@
     <link rel="stylesheet" href="../css/animate.css">
     <!-- normalize CSS ============================================ -->
     <link rel="stylesheet" href="../css/normalize.css">
-    <!-- mCustomScrollbar CSS============================================ -->
-    <link rel="stylesheet" href="../css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- jvectormap CSS	============================================ -->
     <link rel="stylesheet" href="../css/jvectormap/jquery-jvectormap-2.0.3.css">
     <!-- notika icon CSS ============================================ -->
@@ -39,135 +42,239 @@
     <link rel="stylesheet" href="../css/responsive.css">
     <!-- modernizr JS ============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Bootstrap And JQuery ============================================ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+        <!-- jquery ============================================ -->
+    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+     <!-- bootstrap JS ============================================ -->
+    <script src="../js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
     <!-- START Include for Header -->
-        <?php include "../php/header.php" ?> 
+   <?php include "../php/header.php" ?> 
     <!-- END Include for Header -->
-    
     <!-- START Include for Menu -->
-         <?php include "../php/menu.php" ?> 
+     <?php include "../php/menu.php" ?> 
     <!-- END Include for Menu-->
     
-    <!-- Breadcomb area Start-->
-    <div class="breadcomb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="breadcomb-list">
-                        <div class="row">
-                            <h2 style="text-align:center">תיקונים</h2>
+    <!-- START BODY-->
+    <form method="POST" action="">
+        <div class="form-element-area">
+            <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-element-list">
+                                <div class="basic-tb-hd">
+                                    <h1 class="centerText">מכירה חדשה</h1><br>
+                                    <h2 id="test">פרטי הלקוח</h2>
+                                </div>
+                                <!--Start Customer Details-->
+                                <div class="row">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                          שם פרטי
+                                            <input type="text" name = "firstName" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin: 10px auto;text-align:center;">
+                                          שם משפחה
+                                            <input type="text" name = "lastName" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                            טלפון
+                                            <input type="text" name = "phone" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                            תעודת זהות
+                                            <input type="text" name = "customerId" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                            אי-מייל
+                                            <input type="text" name = "customerEmail" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto; text-align:center;">
+                                            הערות
+                                            <input type="text" name = "comment" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            <!--END Customer Details-->
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcomb area End-->
-    
-        <!-- Search at Data Table Start-->
-<script>
-    function isExistingCellStartWith(children, length, filter) {
-        let td;
-         for (child = 1; child < length; child++) {  
-             td = children[child];
-             if(td.innerHTML.toUpperCase().includes(filter)) {
-                 return true
-             }
-        }
-        return false;
-    }
-
-    function myFunction() {
-      let input, filter, a, i, j, td, trs, child, table;
-      input = document.getElementById("mySearch");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("data-table-basic");
-      trs = table.getElementsByTagName("tr");
-      for (i = 1; i < trs.length; i++) {
-            if(isExistingCellStartWith(trs[i].children, trs[i].children.length, filter)) {
-                trs[i].style.display = "";
-            } else {
-                trs[i].style.display = "none";
-            }
-        }
-    }
-</script>
-<!-- Search at Data Table End-->
-    
-<!-- Data Table area Start-->
-    <div class="data-table-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2 style="text-align:center">תיקונים שהושלמו</h2>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="centerTableTr">שמור</th>
-                                        <th class="centerTableTr">סטטוס</th>
-                                        <th class="centerTableTr">מספר ימים משוער לתיקון</th>
-                                        <th class="centerTableTr">תאריך פתיחת טיפול</th>
-                                        <th class="centerTableTr">מחיר משוער</th>
-                                        <th class="centerTableTr">פירוט הבעיה</th>
-                                        <th class="centerTableTr">ת"ז לקוח</th>
-                                        <th class="centerTableTr">שם לקוח</th>
-                                        <th class="centerTableTr">מק"ט</th>
-                                        <th class="centerTableTr">שם המוצר</th>
-                                        <th class="centerTableTr">מס' תיקון</th>
-                                        <input type="text" id="mySearch" onchange="myFunction()" placeholder="חפש תיקון" title="Type in a category">
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-
-                                        require_once('../php/Database.php');
-                                        global $db;
-                                        $db->query("SET CHARACTER SET 'hebrew'");
-                                        $db->query("SET NAMES 'utf8'");
-                                        $result = $db ->query('select * from repair r JOIN customers c ON r.customerId=c.customerId JOIN repairStatuses rs ON rs.customerId=c.customerId');
-                                        
-                                        //print_r($result);
-                                        //$result = $result->fetch_assoc();  //for testing
-                                        
-                                       while($row = $result->fetch_assoc()){
-                                           //print_r($row);
-                                         if ($row['repairStatus'] == 2){
-                                            echo '<tr>';
-                                            echo '<td> <button onclick="myFunction()">&#x2705</button> </td>';
-                                                echo '<td class="centerTableTr">
-                                                     <select name=selectStatus>  
-                                                         <option value="1">בטיפול</option>  
-                                                         <option value="2" selected> הושלם</option>  
-                                                         <option value="3">נאסף</option>  
-                                                     </select> </td>';
+        <!-- Data Table area Start-->
+                <div class = "row">
+                    <div class="data-table-area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="data-table-list">
+                                        <div class="basic-tb-hd">
+                                            <h2 style="text-align:center">מוצרים</h2>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table id="data-table-basic" class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="centerTableTr"></th>
+                                                        <th class="centerTableTr">כמות</th>
+                                                        <th class="centerTableTr">מחיר ליחידה</th>
+                                                        <th class="centerTableTr">מק"ט</th>
+                                                        <th class="centerTableTr">שם המוצר</th>
+                                                        <th><a href="#" style="font-size:30px;" id="addNewRow" title="Add More Person"><span class="glyphicon glyphicon-plus"></span></a></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="productsTable">
+                                                    <tr>
+                                                        <td style="padding:25px;"><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
+                                                        <td><input type="text" class="form-control" name="quantity1"></td>
+                                                        <td><input type="text" class="form-control" name="totalPrice1"></td>
+                                                        <td><input type="text" class="form-control" name="productId1"></td>
+                                                        <td><input type="text" class="form-control" name="productName1"></td>
+                                                    </tr>
                                             
-                                           echo '<td class="centerTableTr">' .$row['estimateRepairDays'] .'</td>';
-                                           echo ' <td class="centerTableTr">' .$row['dateCreated'] .'</td>';
-                                           echo ' <td class="centerTableTr">' .$row['estimatePrice'] .'</td>';
-                                          echo ' <td class="centerTableTr">' .$row['repairDescription'] .'</td>';
-                                          echo ' <td class="centerTableTr">' .$row['customerId'] .'</td>';
-                                          echo ' <td class="centerTableTr">' .$row['firstName'] . " " . $row['lastName']. '</td>';
-                                          echo ' <td class="centerTableTr">' .$row['repairProductId'] .'</td>';
-                                          echo ' <td class="centerTableTr">' .$row['repairProductName'] .'</td>';
-                                       echo '</tr> ';
-                                        }
-                                       }
-                                    ?>
-                                </tbody>
-                            </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <input style="display:block;margin:auto;"type="submit" value="שמור מכירה" name="addOrder">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>   
+    </form>
+    <!-- END BODY-->
+    
+    <!-- PHP SEND FORM-->
+        <?php
+            session_start();
+            if($_POST['addOrder']){
+                require_once('../php/Order.php');
+                $isOrderAddedSuccessfully = false;
+                $isCustomerDetailsOK = FALSE;
+                $isProductsAddedOk = false;
+                global $order;
+                $order->addNewOrder();
+                if($isOrderAddedSuccessfully && $isCustomerDetailsOK){ 
+                /*order added */
+                echo "<script type='text/javascript'> $(window).load(function(){ $('#orderAddedSuccessfully').modal('show'); }); </script>";
+
+                }else if (!$isCustomerDetailsOK){
+                /*Detaild issues*/
+                echo "<script type='text/javascript'> $(window).load(function(){ $('#invalidCustomerDetails').modal('show'); }); </script>";
+
+                }else if (!$isOrderAddedSuccessfully || $isProductsAddedOk){
+                /*Product issues*/
+                echo "<script type='text/javascript'> $(window).load(function(){ $('#invalidProductsOrder').modal('show'); }); </script>";
+
+                }
+            }
+        ?>
+    <!-- PHP SEND FORM-->
+    
+<!--Modal for order added-->
+    <div class="modal fade" id="orderAddedSuccessfully" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style ="text-align:center;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                הזמנה נוספה בהצלחה
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            הזמנתך נוספה בהצלחה
+           <br>
+            כעת אתה יכול לראות את ההזמנה בעמוד היסטוריית המכירות
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:auto;display:block;">
+                סגור
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- Data Table area End-->
+<!--Modal for order added-->
+    
+<!--Modal for Customer details invalid - order did not added successfully-->
+    <div class="modal fade" id="invalidCustomerDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style ="text-align:center;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                מצטערים אך הזמנתך לא נוספה בהצלחה
+                </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            נראה כי היתה בעיה עם פרטי הלקוח
+            <br>
+            אנא נסה שנית
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:auto;display:block;">
+                סגור
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--Modal for Customer details invalid - order did not added successfully-->
+
+<!--Modal for error added the order products were invalid-->
+    <div class="modal fade" id="invalidProductsOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"style ="text-align:center;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                מצטערים אך הזמנתך לא נוספה בהצלחה
+                </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            נראה כי היתה בעיה עם המוצרים שהוזנו או כלל ההזמנה
+            <br> 
+            אנא נסה שנית
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:auto;display:block;">
+                סגור
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--Modal for error added the order products were invalid-->
+
+    
     
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
@@ -181,19 +288,11 @@
             </div>
         </div>
     </div>
-        <!-- End Footer area-->
-        
 
-        
-        
-    <!-- jquery ============================================ -->
-    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
-    <!-- bootstrap JS ============================================ -->
-    <script src="../js/bootstrap.min.js"></script>
+     <!-- End Footer area-->
+
     <!-- wow JS ============================================ -->
     <script src="../js/wow.min.js"></script>
-    <!-- price-slider JS ============================================ -->
-    <script src="js/jquery-price-slider.js"></script>
     <!-- owl.carousel JS ============================================ -->
     <script src="../js/owl.carousel.min.js"></script>
     <!-- scrollUp JS ============================================ -->
@@ -204,12 +303,6 @@
     <script src="../js/counterup/jquery.counterup.min.js"></script>
     <script src="../js/counterup/waypoints.min.js"></script>
     <script src="../js/counterup/counterup-active.js"></script>
-    <!-- mCustomScrollbar JS ============================================ -->
-    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- jvectormap JS ============================================ -->
-    <script src="../js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="../js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="../js/jvectormap/jvectormap-active.js"></script>
     <!-- sparkline JS ============================================ -->
     <script src="../js/sparkline/jquery.sparkline.min.js"></script>
     <script src="../js/sparkline/sparkline-active.js"></script>
@@ -235,9 +328,8 @@
     <script src="../js/todo/jquery.todo.js"></script>
     <!-- plugins JS ============================================ -->
     <script src="../js/plugins.js"></script>
-    <!-- main JS ============================================ -->
-    <script src="../js/main.js"></script>
+    <!--Script to add new rows with count ids-->
+    <script src="../js/ourJs/jsForNewOrders.js">></script>
 
 </body>
-
 </html>
