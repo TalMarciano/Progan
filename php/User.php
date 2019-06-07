@@ -1,5 +1,9 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+    if (session_status() == PHP_SESSION_NONE) {
     session_start();
+    }
     require_once('init.php');
 	class User{
             private $userName;
@@ -16,59 +20,70 @@
                 $this->userId = $userName;
                 $this->isSignIn = $signedIn;
             }
-            public function getProductPerCity($city){
+            public function logout(){
+                session_destroy();
+            }
+            public function updateUserDetails(){
                 global $db; 
-                global $session;
-                if(!$db->get_connection()){ //NO CONNECTION TO DB
-                    echo "connection db failed";
-                    die("Connection Failed");
-                }
-                else{
-                    $userName = $_SESSION['userName'];
-                    $sql = "select p.productname as ProductName, COUNT(city) as countPerProduct 
-                            from users u 
-                            JOIN orders o on o.shipEmail = u.email 
-                            JOIN orderProducts op on op.orderId = o.orderId 
-                            JOIN products p on p.productId = op.productId 
-                            where u.City = '" .$city ."' group by p.productid";
-                    $result = $db->query($sql);
-                    $tempJson=array();
-                    if($result->num_rows > 0){
-                       while($row = $result->fetch_assoc()){
-                           $tempJson[] = json_encode($row);
-                       }
-                        $json = json_encode($tempJson);
-                        return $json;
-                    }
-                    else{
-                        echo "please contact us, and let us know that your orders details didn't load :(";
-                    }
+                $userId = filter_input(INPUT_POST, 'userIdForUpdate');
+                $firstName = filter_input(INPUT_POST, 'firstName');
+                $lastName = filter_input(INPUT_POST, 'lastName');
+                $email = filter_input(INPUT_POST, 'email');
+                $isManager = filter_input(INPUT_POST, 'isManagerSelectedSend');
+                $updateUserDetailsQuery = "update users SET firstName = '" .$firstName ."', lastName = '" .$lastName ."', email = '" .$email ."', isManager = " .$isManager ." where userId = " .$userId; 
+                $result = $db->query($updateUserDetailsQuery); 
+                if($result){
+                    global $isupdated; 
+                    $isupdated = true; 
                 }
             }
-            public function getUserPerCity(){
-               global $db; 
-               global $session;
-                if(!$db->get_connection()){ //NO CONNECTION TO DB
-                    echo "connection db failed";
-                    die("Connection Failed");
+            public function deleteUser(){
+                global $db;
+                $userId = $_POST['deleteUserId'];
+                $userEmail = "select email from users where userId = " .$userId;
+                $email = $db->query($userEmail);
+                $email = $email->fetch_assoc();
+                $deleteUser = "delete from users WHERE userId = " .$userId;
+                $deleteFromUsers = $db->query($deleteUser);
+                $deleteUserPassQuery = "DELETE FROM userspassword WHERE email ='" .$email['email'] ."'";
+                $deleteUserPass = $db->query($deleteUserPassQuery);
+                if($deleteFromUsers && $deleteUserPassQuery){
+                    global $isDeleted;
+                    $isDeleted = true;
+                }
+            }
+            public function updateUserPasswordDashboard($email){
+                global $db;
+                $pass = filter_input(INPUT_POST, 'passwordInputChange');
+                $sql = "Update userspassword SET password = '" .md5($pass) ."' where email ='" .$email ."'";
+                $result = $db->query($sql);
+                if($result){
+                     echo "<script type='text/javascript'>
+                    Swal.fire({
+                      position: 'top-end',
+                      type: 'success',
+                      title: 'סיסמא שונתה בהצלחה!',
+                      text: 'אתה מועבר לדאשבורד',
+                      showConfirmButton: true,
+                      timer: 6000
+                    });
+                 </script>";
                 }
                 else{
-                    $userName = $_SESSION['userName'];
-                    $sql = "select city, COUNT(city) as CountPerCity from users GROUP by city";
-                    $result = $db->query($sql);
-                    $tempJson=array();
-                    if($result->num_rows > 0){
-                       while($row = $result->fetch_assoc()){
-                           $tempJson[] = json_encode($row);
-                       }
-                        $json = json_encode($tempJson);
-                        return $json;
-                    }
-                    else{
-                        echo "please contact us, and let us know that your orders details didn't load :(";
-                    }
+                    echo "<script type='text/javascript'>
+                        Swal.fire({
+                          position: 'center',
+                          type: 'error',
+                          title: 'שינוי הסיסמא נכשל';
+                          text: 'אנא נסה שנית ',
+                          showConfirmButton: true,
+                          timer: 60000
+                        });
+                        </script>";
+                    
                 }
-           }
+
+            }
             public function getUserOrders(){
                 global $db;
                 global $session;
@@ -93,8 +108,6 @@
                     }
                 }
             }
-            
-            //////////////////////////////////////////////////////////
             public function getUserDetails(){
                 global $db;
                 if(!$db->get_connection()){ //NO CONNECTION TO DB
@@ -122,7 +135,8 @@
                     die("Connection Failed");
                 }
                 else{
-                    $userEmail = filter_input(INPUT_POST, 'username');
+                    $userEmail = $_POST['username'];
+                    $email = $userEmail; 
                     $userEmail = strtoupper($userEmail); 
                     $userEmail = trim($userEmail);
                     $userPass = filter_input(INPUT_POST, 'pass');
@@ -133,10 +147,12 @@
                         if($userEmail == strtoupper($result['email'])){
                             if(md5($userEmail.md5($userPass)) == md5(strtoupper($result['email']).$result['password'])){ 
                                 global $isSignInSuccess;
-                                //global $session;
                                 $isSignInSuccess = TRUE;
-                                //$this->setNewUser($userEmail, TRUE);
-                               // $session->login($userEmail, TRUE);
+                                $userDetails = "select * from users where email='".$userEmail ."'";
+                                $return = $db->query($userDetails);
+                                $return = $return->fetch_assoc();
+                                $_SESSION['userEmail'] = $userEmail;
+                                $_SESSION['isManager'] = $return['isManager'];
                             }
                         }
                     }
@@ -148,46 +164,151 @@
                     die("Connection failed!");
 		        }
 		        else{
-		            global $invalidRegister;
-                    $userEmail = filter_input(INPUT_POST, 'username');
-                    $tempPass = filter_input(INPUT_POST, 'pass');
-                    $userPass = md5($tempPass);
-                    $userFirstName = filter_input(INPUT_POST, 'firstname');
-                    $userLastName = filter_input(INPUT_POST, 'lastname');
-                    $address = filter_input(INPUT_POST, 'address');
-                    $city = filter_input(INPUT_POST, 'city');
-                    $country = filter_input(INPUT_POST, 'country');
-                    $phone = filter_input(INPUT_POST, 'phone');
-                    if(User::checkUserName($userEmail)){
-        		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Email is invalid.', 'error')</script>";
-                    }
-                    else if(User::checkPassword($userPass)){
-        		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Password is invalid.', 'error')</script>";
-                    }
-                    else if(User::checkNameAndLastName($userFirstName, $userLastName)){
-        		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Name or Last name is invalid.', 'error')</script>";
-                    }
-                    else if(User::checkAddress($address,$city,$country)){
-        		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Address is invalid.', 'error')</script>";
-                    }
-                    else{
-                        $sql = "INSERT INTO users(email, firstname, lastname, Address1, Country, City, Phone, datecreated) 
-                        values('" .$userEmail ."','" .$userFirstName ."','" .$userLastName ."','" .$address ."','" .$country ."','" .$city ."','" .$phone ."',now());";
-                        $result = $db->query($sql);
-                        $sql2 = "INSERT INTO userspassword (email, password) VALUES ('" .$userEmail ."','" .$userPass ."');";
-                        $result2 = $db->query($sql2);
-                        if(!$result || !$result2){
-                            global $errorAddedUser;
-                            $errorAddedUser = TRUE;
-                            $invalidRegister = TRUE;
+		            echo '<br> inside the else in add new user';
+                    $firstName = filter_input(INPUT_POST, 'firstName');
+                    $lastName = filter_input(INPUT_POST, 'lastName');
+                    $userName = filter_input(INPUT_POST, 'userName');
+                    $email = filter_input(INPUT_POST, 'email');
+                    $isManager = filter_input(INPUT_POST, 'isManager');
+                    $userIdGenerate = rand(1000, 100000);
+                    $idSearch = true;
+                    while($idSearch){
+                        $idSearch = $db->query("select userId from users where userid = " .$userIdGenerate);
+                        var_dump($idSearch);
+                        if($idSearch->num_rows >= 1){
+                            $userIdGenerate = rand(1000, 100000);
                         }
                         else{
-                            $invalidRegister = FALSE;
-                            global $userAddedSucessfuly;
-                            $userAddedSucessfuly = TRUE;
+                            $idSearch = false;
                         }
                     }
+                    echo $idSearch;
+                    $sql = "INSERT INTO users(firstName, lastName, email, isManager, datecreated,userId) 
+                    values ('".$firstName."','".$lastName ."','".$email."',".$isManager.",now()," .$userIdGenerate .")";
+                    echo 'insert new user query = '.$sql;
+                    $userAdd = $db->query($sql);
+                    echo '<br> user add = ';
+                    var_dump($userAdd);
+                    $passwordForSend = base_convert(uniqid('pass', true), 10, 36);
+                    echo $passwordForSend;
+                    $sql2 = "insert into userspassword (email, password) VALUES ('" .$email ."','" .md5($passwordForSend) ."')";
+                    $usersPassword = $db->query($sql2);
+                    if(!$userAdd && !$usersPassword){
+                        global $errorAddedUser;
+                        $errorAddedUser = TRUE;
+                        $invalidRegister = TRUE;
+                    }
+                    else{
+                        
+                        $invalidRegister = FALSE;
+                        global $userAddedSucessfuly;
+                        $userAddedSucessfuly = TRUE;
+                        /////////////////////////////
+                        $proganEmail = "progangar@gmail.com";
+                        $subject = "סיסמא לדאשבורד של פרוגן";
+                        $text = "
+                        היי,
+                        " .$email ."
+                        תודה על הרשמתך לדאשבורד של פרוגן.
+                        אנו מאחלים לך הצלחה רבה בעבודתך החדשה.
+                        סיסמא לכניסה למערכת
+                        " .$passwordForSend .""
+                        ."
+                        לכל בעיה יש פתרון
+                        הצלחה רבה ויום נפלא";
+                    	$headers = 'From: progangar@gmail.com' . "\r\n" .
+                                'Reply-To: progangar@gmail.com' . "\r\n" ;
+
+                  		mail($email ,$subject , $text, $headers);
+                  		//$subjectForCopy = "משתמש חדש במערכת - סיסמא הופקה בהצלחה";
+                        //mail($proganEmail ,$subjectForCopy , $text, $headers);
+                        ////////////////////////////
+                    }
                 }
+            }
+            public function resetUserPassword(){
+                $userEmail = filter_input(INPUT_POST, 'forgotPasswordInput');
+                global $db;
+		        if(!$db->get_connection()){
+                    die("Connection failed!");
+		        }
+		        else{
+		            global $isresetWentGood;
+		            $passwordForSend = base_convert(uniqid('pass', true), 10, 36);
+		            $checkIfUserExistQuery = "select * from users where email = '" .$userEmail ."'"; 
+		            $$checkIfUserExist = $db->query($checkIfUserExistQuery);
+		            if($$checkIfUserExist->num_rows >=1){
+    		            $sql = "UPDATE userspassword set password = '" .md5($passwordForSend) ."' where email ='" .$userEmail ."'";
+    		            $result = $db->query($sql); 
+    		            if($result){
+    		                $isresetWentGood = true;
+    		                $proganEmail = "progangar@gmail.com";
+                            $subject = "סיסמא חדשה לפרוגן דאשבורד";
+                            $text = "
+                            היי,
+                            סיסמא חדשה נוצרה למשתמש האישי שלך בפרוגן.
+                            במידה ואינך ביקשת לאפס סיסמא זו, אנא דווח על כך לממונים
+                            הסיסמא החדשה: 
+                            " 
+                            .$passwordForSend
+                            ."
+                            תודה והמשך יום טוב
+                            פרוגן";
+                            $headers = "From: " .$proganEmail;
+                            mail($userEmail ,$subject , $text, $headers);
+                            $subjectForCopy = "איפוס סיסמא למשתמש" .$userEmail ;
+                            mail($proganEmail ,$subjectForCopy , $text, $headers);
+    		            }
+    		            else{
+    		                $isresetWentGood = false;
+    		            }
+		            }
+		        }
+                
+            }
+            public function resetUserPasswordInUsers(){
+                
+                global $db;
+		        if(!$db->get_connection()){
+		            echo 'connection failed';
+                    die("Connection failed!");
+		        }
+		        else{
+		            $userId = filter_input(INPUT_POST, 'userIdForReset');
+		            global $isPasswordChanges;
+		            $passwordForSend = base_convert(uniqid('pass', true), 10, 36);
+		            $checkIfUserExistQuery = "select * from users where userId = " .$userId ; 
+		            $checkIfUserExist = $db->query($checkIfUserExistQuery);
+		            if($checkIfUserExist->num_rows >=1){
+		                $checkIfUserExist = $checkIfUserExist->fetch_assoc();
+    		            $userEmail = $checkIfUserExist['email'];
+    		            $sql = "UPDATE userspassword set password = '" .md5($passwordForSend) ."' where email ='" .$checkIfUserExist['email'] ."'";
+    		            $result = $db->query($sql); 
+    		            if($result){
+    		                $isPasswordChanges = true;
+    		                $proganEmail = "progangar@gmail.com";
+                            $subject = "סיסמא חדשה לפרוגן דאשבורד";
+                            $text = "
+                            היי,
+                            סיסמא חדשה נוצרה למשתמש האישי שלך בפרוגן.
+                            במידה ואינך ביקשת לאפס סיסמא זו, אנא דווח על כך לממונים
+                            הסיסמא החדשה: 
+                            " 
+                            .$passwordForSend
+                            ."
+                            תודה והמשך יום טוב
+                            פרוגן";
+                            $headers = "From: " .$proganEmail;
+                            $isMailSent = mail($userEmail ,$subject , $text, $headers);
+                            $subjectForCopy = "איפוס סיסמא למשתמש" .$userEmail ;
+                            mail($proganEmail ,$subjectForCopy , $text, $headers);
+    		            }
+    		            else{
+    		                $isPasswordChanges = false;
+    		            }
+		            }
+		        }
+                
             }
                private static function checkAddress($address,$city,$country){
               //  $address = preg_match('%^[0-9]%', $address); 
