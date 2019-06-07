@@ -4,7 +4,9 @@ echo '<!-- Start Header Top Area -->
         <div class="container">
             <div class="row">
 				<div class="logo-area">
-                    <img src="../images/logo.png" alt="" />
+				    <div class = "logoBackground">
+                        <img src="../images/logo.png" alt="" />
+                    </div>
 				</div>
             </div>
         </div>
