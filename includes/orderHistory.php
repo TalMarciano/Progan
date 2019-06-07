@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['userEmail'])){
+        header('Location: http://amitsl.mtacloud.co.il');
+    }
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -49,69 +56,41 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
     <!-- Modal ============================================ -->
+    <!-- Bootstrap And JQuery ============================================ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+    <!-- jquery ============================================ -->
+    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+     <!-- bootstrap JS ============================================ -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Script for everyone ============================================ -->
+    <script src="../js/ourJs/scriptForEveryone.js"></script>
+    <script src="../js/ourJs/orderScript.js"></script>
+    <!-- Modal Scripts ============================================ -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
     <!-- START Include for Header -->
-        <?php include "../php/header.php" ?> 
+        <?php include "../php/header.php"?> 
+        <?php include 'ChromePhp.php'?>
     <!-- END Include for Header -->
-    
+
     <!-- START Include for Menu -->
          <?php include "../php/menu.php" ?> 
     <!-- END Include for Menu-->
     
-    <!-- Breadcomb area Start-->
-    <div class="breadcomb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="breadcomb-list">
-                        <div class="row">
-                            <h2 style="text-align:center">היסטוריית מכירות</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcomb area End-->
-    
-    <!-- Search at Data Table Start-->
-    <script>
-        function isExistingCellStartWith(children, length, filter) {
-            let td;
-             for (child = 1; child < length; child++) {  
-                 td = children[child];
-                 if(td.innerHTML.toUpperCase().includes(filter)) {
-                     return true
-                 }
-            }
-            return false;
-        }
-    
-        function myFunction() {
-          let input, filter, a, i, j, td, trs, child, table;
-          input = document.getElementById("mySearch");
-          filter = input.value.toUpperCase();
-          table = document.getElementById("data-table-basic");
-          trs = table.getElementsByTagName("tr");
-          for (i = 1; i < trs.length; i++) {
-                if(isExistingCellStartWith(trs[i].children, trs[i].children.length, filter)) {
-                    trs[i].style.display = "";
-                } else {
-                    trs[i].style.display = "none";
-                }
-            }
-        }
-    </script>
-<!-- Search at Data Table End-->
-
 <!-- Data Table area Start-->
     <div class="data-table-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h2 style="text-align:center">היסטוריית מכירות</h2>
+                   <input type="text" id="mySearch" class="searchBarStyle" onchange="myFunction()" placeholder="חפש מכירה " title="Type in a category">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
                         </div>
@@ -119,87 +98,134 @@
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="centerTableTr">פרטי המכירה</th>
-                                        <th class="centerTableTr">נוצר בתאריך </th>
-                                        <th class="centerTableTr">מחיר כולל</th>
-                                        <th class="centerTableTr">שם הלקוח</th>
-                                        <th class="centerTableTr">מספר מכירה</th>
-                                        <input type="text" id="mySearch" onchange="myFunction()" placeholder="חפש מכירה " title="Type in a category">
+                                        <th class="centerTableTr tableBoldText">פרטי המכירה</th>
+                                        <th class="centerTableTr tableBoldText">נוצר בתאריך </th>
+                                        <th class="centerTableTr tableBoldText">מחיר כולל מע"מ</th>
+                                        <th class="centerTableTr tableBoldText">שם הלקוח</th>
+                                        <th class="centerTableTr tableBoldText">מספר מכירה</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                       <?php
                                         require_once('../php/Database.php');
+                                        echo '<div id="isManagerParameterForThatUser" style="display:none;">' .$_SESSION['isManager'] .'</div>';
                                         global $db;
                                         $db->query("SET CHARACTER SET 'hebrew'");
                                         $db->query("SET NAMES 'utf8'");
-                                        $sql = "select * from orders o JOIN customers oc ON o.customerEmail=oc.email";
-                                        $result = $db ->query($sql);
-                                        while($row = $result->fetch_assoc()){
+                                        $sql = "select DISTINCT * from orders o";
+                                        $ordersDetails = $db ->query($sql);
+                                        while($row = $ordersDetails->fetch_assoc()){
+                                            $customerEmail = $row['customerEmail'];
+                                            $customerDetails = "select * from customers where email='" .$customerEmail ."'";
+                                            $customerDetailsQuery = $db->query($customerDetails);
+                                            $customerDetailsQuery = $customerDetailsQuery->fetch_assoc();
                                             echo '<tr>';
-                                            echo '<td> <a  data-toggle="modal" href="#'  .$row['orderid']  .'"> check </a></td>';
-                                            echo ' <td class="centerTableTr">' .$row['dateCreated'] .'</td>';
+                                            echo '<td>';
+                                                echo '<button type="button" data-toggle="modal" data-target="#' .$row['orderid'] .'">';
+                                                echo 'פרטי הזמנה';
+                                                echo '</button>';
+                                            echo '</td>';
+                                            echo ' <td class="centerTableTr">' .$row['datecreated'] .'</td>';
                                             echo ' <td class="centerTableTr">' .$row['totalOrderPrice'] .'</td>';
-                                            echo ' <td class="centerTableTr">' .$row['firstName'].' '.$row['lastName'] .'</td>';
+                                            echo ' <td class="centerTableTr">' .$customerDetailsQuery['firstName'] .' ' .$customerDetailsQuery['lastName'] .'</td>';
                                             echo ' <td class="centerTableTr">' .$row['orderid'] .'</td>';
                                             echo '</tr> ';
                                         }
                                         echo '</tbody></table></div></div></div></div></div></div>';
+                                        //////////End Of table//////////////////////////
                                         $result2 = $db ->query($sql);
+                                        
                                         while($row = $result2->fetch_assoc()){
-                                        ///////////MODAL//////////////////////////////
-                                                echo '<!-- Modal: modalOrder -->';
-                                                echo '<div class="modal fade" id="' .$row['orderid'] .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-                                                  echo '<div class="modal-dialog" role="document">';
-                                                    echo '<div class="modal-content">';
-                                                      echo '<!--Header-->';
-                                                       echo '<h4 class="modal-title" style="text-align:center;" id="myModalLabel">';
-                                                         echo $row['orderid'] .'<br>' .$row['firstName'] .' ' .$row['lastName'] .'<br>' .$row['customerEmail'] .'</h4>';
-                                                         echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-                                                     echo '<!--Body-->';
-                                                      echo '<div class="modal-body">';
-                                                        echo '<table class="table table-hover">';
-                                                          echo '<thead>';
+                                            ///////////MODAL//////////////////////////////
+                                            $customerIdL = $row['customerEmail'];
+                                            $customerDetails = "select * from customers where email='" .$customerIdL ."'";
+                                            $customerDetailsQuery = $db->query($customerDetails);
+                                            $customerDetailsQuery = $customerDetailsQuery->fetch_assoc();
+                                            echo '<div class="modal fade" id="' .$row['orderid'] .'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
+                                              echo '<div class="modal-dialog modal-lg" role="document">';
+                                                echo '<div class="modal-content">';
+                                                  echo '<div class="modal-header">';
+                                                    echo '<h4 class="modal-title" id="myModalLabel" style="text-align:center;">';
+                                                			echo 'פרטי מכירה ';
+                                                			echo $row['orderid'] .'<br>לקוח - ' .$customerDetailsQuery['firstName'] .' ' .$customerDetailsQuery['lastName']
+                                                			.' ' .$customerDetailsQuery['phone']
+                                                			;
+                                                  		echo '</h4>';
+                                                  echo '</div>';
+                                                  echo '<div class="modal-body" style="text-align:center;">';
+                                                     echo '<table DIR="RTL" class="modalTable">';
+                                                      echo '<tr>';
+                                                        echo '<th class="fontSizeModalTable ">
+                                                            #
+                                                        </th>';
+                                                        echo '<th class="fontSizeModalTable">
+                                                            שם
+                                                        </th>';
+                                                        echo '<th class="fontSizeModalTable">
+                                                            מק"ט
+                                                        </th>';
+                                                        echo '<th class="fontSizeModalTable">
+                                                            מחיר מוצר
+                                                        </th>';
+                                                        echo '<th class="fontSizeModalTable">
+                                                            כמות
+                                                        </th>';
+                                                      $orderQuery = "select * from orderProducts where orderId =" .$row['orderid'];
+                                                      $odetails = $db->query($orderQuery);
+                                                      $productCounter = 1;
+                                                      $totalProductsPrice = 0;
+                                                      while ($orderDetail = $odetails->fetch_assoc()){
+                                                          $productCounterLoop = $productCounter;
+                                                        echo '<tr>';
+                                                            echo '<th class="fontSizeModalTable productClassCounter' .$row['orderid'] .'">' .$productCounterLoop .'</th>';
+                                                            echo '<th class="fontSizeModalTable" id="productName' .$row['orderid'] .'-' .$productCounter .'">' .$orderDetail['productName'] .'</th>';
+                                                            echo '<th class="fontSizeModalTable" id="productId' .$row['orderid'] .'-' .$productCounter .'">' .$orderDetail['productId'] .'</th>';
+                                                            echo '<th class="fontSizeModalTable" id="productPrice' .$row['orderid'] .'-' .$productCounter .'">' .$orderDetail['totalPrice'] .'</th>';
+                                                            echo '<th class="fontSizeModalTable" id="productQuantity' .$row['orderid'] .'-' .$productCounter .'">' .$orderDetail['quantity'] .'</th>';
+                                                        echo '</tr>';
+                                                        $totalProductsPrice += $orderDetail['totalPrice'];
+                                                        $productCounter += 1;
+                                                     }
+                                                    echo '</table><br><br>';
+                                                    echo '<table DIR="RTL" class="modalTable">';
                                                             echo '<tr>';
-                                                            echo '<th>כמות</th>';
-                                                              echo '<th>מחיר</th>';
-                                                              echo '<th>קוד מוצר</th>';
-                                                              echo '<th>שם מוצר</th>';
-                                                              echo '<th>#</th>';
+                                                            echo '<th class="modalTableButton">מחיר  מוצרים : </th>';
+                                                            echo '<th class="modalButtonValue" id="totalProductsPrice' .$row['orderid'] .'">' .$totalProductsPrice ."</th>";
                                                             echo '</tr>';
-                                                          echo '</thead>';
-                                                          echo '<tbody>';
-                                                          $orderQuery = "select * from orders o JOIN orderProducts op ON op.orderId=o.orderid Join products p on p.productid = op.productId where o.orderid = " .$row['orderid'];
-                                                          $odetails = $db->query($orderQuery);
-                                                          $productCounter = 0;
-                                                          while ($orderDetail = $odetails->fetch_assoc()){
+                                                            
                                                             echo '<tr>';
-                                                              echo '<th scope="row">' .$orderDetail['quantity'] .'</th>';
-                                                              echo '<th>' .$orderDetail['totalPrice'] .'</th>';
-                                                              echo '<th>' .$orderDetail['productId'] .'</th>';
-                                                              echo '<th>' .$orderDetail['productName'] .'</th>';
-                                                              echo '<td>' .$productCounter + 1 .'</td>';
+                                                                echo '<th class="modalTableButton">מחיר סופי:</th>';
+                                                                echo '<th class=" modalButtonValue" id="totalOrderPrice' .$row['orderid'] .'">' .$totalProductsPrice*1.17 .'</th>';
                                                             echo '</tr>';
-                                                            $productCounter += 1;
-                                                          }
-                                                          echo '</tbody>';
                                                         echo '</table>';
-                                                      echo '</div>';
-                                                      echo '<h4 style="text-align:center;" class="modal-title">מחיר סופי ';
-                                                        echo '<span>' .$row['totalOrderPrice'] .'</span>';
-                                                      echo '</h4>';
-                                                      echo '<!--Footer-->';
-                                                      echo '<div class="modal-footer">';
-                                                 			  echo '<button style="margin:auto" type="button" class="btn btn-outline-primary" data-dismiss="modal">סגור</button>';
-                                                      echo '</div></div></div></div><!-- Modal: modalCart -->';
-                                              //////////////////////////////////////// 
+                                                //////END BODY TABLE GOES HERE////////////
+                                                  echo '</div>';
+                                                  echo '<div class="modal-footer">';
+                                                    echo '<button type="button" class="btn btn-default" data-dismiss="modal" style="float: left;display: block; margin: auto;">';
+                                                		echo 'סגור';
+                                                		echo '</button>';
+                                                		echo '<button type="button" class="btn btn-default buttonForManagers" data-dismiss="modal" onclick="deleteOrder(' .$row['orderid'] .')" style="float: left;display: block; margin: auto;">';
+                                                		echo 'מחק מכירה';
+                                                		echo '</button>'; 
+                                                		echo '<div id="hiddenFormForDeleteOrder" style="display:none;"></div>';
+                                                        echo '<button type="button" class="btn btn-default buttonForManagers" onclick="updateButton(' .$row['orderid'] .')" id="updateBtnInModal' .$row['orderid'] .'" style="float: left;display: block; margin: auto;">';
+                                                		echo 'ערוך';
+                                                		echo '</button>';   
+                                                	    echo '<div id="hiddenFormForUpdateOrder" style="display:none;"></div>';
+                                                		 echo '<button type="button" disabled class="btn btn-default buttonForManagers" onclick="cancelButtun(' .$row['orderid'] .')" id="updateBtnInModalCancel' .$row['orderid'] .'" style="float: left;display: block; margin: auto;">';
+                                                		echo 'ביטול';
+                                                		echo '</button>';
+                                                  echo '</div>';
+                                                echo '</div>';
+                                              echo '</div>';
+                                            echo '</div>';
                                         }
-                                        ?>
+                                    ?>
 
     <!-- Data Table area End-->
-   
+
     <!-- Start Footer area-->
-    <div class="footer-copyright-area">
+    <div class="footer-copyright-area" onload="myFunction()">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -210,6 +236,18 @@
             </div>
         </div>
     </div>
+    <?php
+        require_once('../php/Order.php');
+        global $order; 
+        if(isset($_POST['deleteOrderId'])){
+            $orderId = $_POST['deleteOrderId'];
+            $order->deleteOrder($orderId);
+        }
+        if(isset($_POST['orderIdNumber'])){
+            $orderId = $_POST['orderIdNumber'];
+            $order->updateOrder($orderId);
+        }
+    ?>
     <!-- End Footer area-->
     <!-- Modal ============================================ -->
     <!-- JQuery -->
@@ -272,7 +310,37 @@
     <script src="../js/plugins.js"></script>
     <!-- main JS ============================================ -->
     <script src="../js/main.js"></script>
+        <!-- Search at Data Table Start-->
+    <script src="../js/ourJs/orderScript.js"></script>
     
+    <script>
+        function isExistingCellStartWith(children, length, filter) {
+            let td;
+             for (child = 1; child < length; child++) {  
+                 td = children[child];
+                 if(td.innerHTML.toUpperCase().includes(filter)) {
+                     return true
+                 }
+            }
+            return false;
+        }
+    
+        function myFunction() {
+          let input, filter, a, i, j, td, trs, child, table;
+          input = document.getElementById("mySearch");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("data-table-basic");
+          trs = table.getElementsByTagName("tr");
+          for (i = 1; i < trs.length; i++) {
+                if(isExistingCellStartWith(trs[i].children, trs[i].children.length, filter)) {
+                    trs[i].style.display = "";
+                } else {
+                    trs[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+<!-- Search at Data Table End-->
 
 </body>
 
