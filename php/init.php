@@ -8,6 +8,7 @@
     require_once($_SERVER["DOCUMENT_ROOT"].'/php/Session.php');
 	// FOR USER //
     require_once($_SERVER["DOCUMENT_ROOT"].'/php/User.php');
+    require_once($_SERVER["DOCUMENT_ROOT"].'/php/Customer.php');
 
 
     
