@@ -1,4 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
+<?php
+     //Enable error reporting.
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(!isset($_SESSION['userEmail'])){
+        header('Location: http://amitsl.mtacloud.co.il');
+    }
+
+?>
+
 <html class="no-js" lang="">
 
 <head>
@@ -41,6 +54,22 @@
     <link rel="stylesheet" href="../css/responsive.css">
     <!-- modernizr JS ============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Script for everyone ============================================ -->
+    <script src="../js/ourJs/scriptForEveryone.js"></script>        
+    <!-- customerScript ============================================ -->
+    <script src="../js/ourJs/customerScript.js"></script>    
+    <!-- Modal Scripts ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <!-- Modal ============================================ -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+    <!-- Modal ============================================ -->
 </head>
 
 <body>
@@ -59,8 +88,9 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="breadcomb-list">
                         <div class="row">
-                            <h2 style="text-align:center">לקוחות</h2>
+                            <h2 style="text-align:center;margin: auto;">לקוחות</h2>
                         </div>
+                        <input type="text" class="searchBarStyle" id="mySearch" onchange="myFunction()" placeholder="חפש לקוח" title="Type in a category">
                     </div>
                 </div>
             </div>
@@ -68,34 +98,7 @@
     </div>
     <!-- Breadcomb area End-->
     
-        <!-- Search at Data Table Start-->
-<script>
-    function isExistingCellStartWith(children, length, filter) {
-        let td;
-         for (child = 1; child < length; child++) {  
-             td = children[child];
-             if(td.innerHTML.toUpperCase().startsWith(filter)) {
-                 return true
-             }
-        }
-        return false;
-    }
-
-    function myFunction() {
-      let input, filter, a, i, j, td, trs, child, table;
-      input = document.getElementById("mySearch");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("data-table-basic");
-      trs = table.getElementsByTagName("tr");
-      for (i = 1; i < trs.length; i++) {
-            if(isExistingCellStartWith(trs[i].children, trs[i].children.length, filter)) {
-                trs[i].style.display = "";
-            } else {
-                trs[i].style.display = "none";
-            }
-        }
-    }
-</script>
+<!-- Search at Data Table Start-->
 <!-- Search at Data Table End-->
 
     <!-- Data Table area Start-->
@@ -104,134 +107,188 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                        </div>
                         <div class="table-responsive">
                             <!-- button trigger the modal -->
-                             <button type="button" class="btn btn-sm button-my-account" data-toggle="modal" data-target="#exampleModal1">Edit</button>
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="centerTableTr">סוג הרשאה</th>
-                                        <th class="centerTableTr">מייל</th>
-                                        <th class="centerTableTr">שם משתמש</th>
-                                        <input type="text" id="mySearch" onchange="myFunction()" placeholder="חפש לקוח" title="Type in a category">
+                                        <th class="centerTableTr tableBoldText"> פרטים נוספים </th>
+                                        <th class="centerTableTr">מייל </th>
+                                        <th class="centerTableTr">מספר טלפון </th>
+                                        <th class="centerTableTr">תעודת זהות </th>
+                                        <th class="centerTableTr">שם משפחה</th>
+                                        <th class="centerTableTr">שם פרטי</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="centerTableTr">מנהל</td>
-                                        <td class="centerTableTr">ami@gmail.com</td>
-                                        <td class="centerTableTr">עמי מרציאנו</td>
-                                        <td>
+                                        <?php
 
+                                        require_once('../php/Database.php');
+                                        global $db;
+                                        echo '<div id="isManagerParameterForThatUser" style="display:none;">' .$_SESSION['isManager'] .'</div>';
+                                        $db->query("SET CHARACTER SET 'hebrew'");
+                                        $db->query("SET NAMES 'utf8'");
+                                        $result = $db ->query('select * from customers');
+                                        
+                                        //print_r($result);
+                                        //$result = $result->fetch_assoc();  //for testing
+                                        
+                                        
+                                        while($row = $result->fetch_assoc()){
+                                            echo '<tr>';
+                                            echo '<td>';
+                                            echo '<button type="button" data-toggle="modal" data-target="#' .$row['customerId'] .'">';
+                                            echo 'עריכה';
+                                            echo '</button>';
+                                            echo '</td>';
+                                           echo '<td class="centerTableTr">' .$row['email'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['phone'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['customerId'] .'</td>';
+                                           echo ' <td class="centerTableTr">' .$row['lastName'] .'</td>';
+                                          echo ' <td class="centerTableTr">' .$row['firstName'] .'</td>';
+                                       echo '</tr> ';
+                                        }
+                                        
+                                         echo '</tbody> </table> </div>';
+                                         //////////End Of table//////////////////////////
+                                         $sql = 'select * from customers';
+                                        $modalQueryCreate = $db ->query($sql);
+                                        while($row = $modalQueryCreate->fetch_assoc()){
+                                            ///////////MODAL//////////////////////////////
+                                                /////////CUSTOMER//////////
+                                                $customerId = $row['customerId'];
+                                                $customerDetailsString = "select * from customers where customerId='" .$customerId ."'";
+                                                $customerDetails = $db->query($customerDetailsString);
+                                                $customerDetails = $customerDetails->fetch_assoc();
+                                                echo '<div class="modal" id="' .$row['customerId'] .'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">';
+                                                  echo '<div class="modal-dialog modal-lg" role="document">';
+                                                    echo '<div class="modal-content">';
+                                                      echo '<div class="modal-header">';
+                                                        echo '<h4 class="modal-title" id="myModalLabel" style="text-align:center;">';
+                                                			echo ' פרטי לקוח ';
+                                                			echo '<br>' .$row['firstName'] .' ' .$row['lastName'];
+                                                  		echo '</h4>';
+                                                      echo '</div>';
+                                                      echo '<div class="modal-body" style="text-align:center;">';
+                                                         echo '<table DIR="RTL" class="modalTable">';
+                                                          echo '<tr>';
+                                                                echo '<th class="fontSizeModalTable">
+                                                                    שם פרטי 
+                                                                </th>';
+                                                                echo '<th class="fontSizeModalTable">
+                                                                    שם משפחה
+                                                                </th>';
+                                                                echo '<th class="fontSizeModalTable">
+                                                                    תעודת זהות 
+                                                                </th>';
+                                                                echo '<th class="fontSizeModalTable">
+                                                                    טלפון
+                                                                </th>';
+                                                                echo '<th class="fontSizeModalTable">
+                                                                    מייל
+                                                                </th>';
+                                                            echo '</tr>';
+                                                            //////////
+                                                           $customerDetailsQuery = "select * from customers where customerId='" .$customerId ."'";
+                                                           $customerDetails = $db->query($customerDetailsQuery);
+                                                          ////////
+                                                            echo '<tr>';
+                                                              echo '<th class="fontSizeModalTable" id="firstName' .$row['customerId'] .'">' .$row['firstName'] .'</th>';
+                                                              echo '<th class="fontSizeModalTable" id="lastName' .$row['customerId'] .'">' .$row['lastName'] .'</th>';
+                                                              echo '<th class="fontSizeModalTable" id="customerId' .$row['customerId'] .'">' .$row['customerId'] .'</th>';
+                                                              echo '<th class="fontSizeModalTable" id="phone' .$row['customerId'] .'">' .$row['phone'] .'</th>';                                                              
+                                                              echo '<th class="fontSizeModalTable" id="email' .$row['customerId'] .'">' .$row['email'] .'</th>';
+                                                            echo '</tr>';
+                                                        echo '</table>';
+                                                      echo '</div>';
+                                                     
+                                                    //////END BODY TABLE GOES HERE////////////
+                                                      echo '<div class="modal-footer">';
+                                                        echo '<button type="button" class="btn btn-default" data-dismiss="modal" style="float: left;display: block; margin: auto;">';
+                                                		echo 'סגור';
+                                                		echo '</button>';
+                                                		echo '<div id="hiddenFormForResetPass" style="display:none;"></div>';
+                                                		echo '<div id="hiddenFormForupdateCustomer" style="display:none;"></div>';
+                                                		echo '<div id="hiddenFormForDeleteCustomer" style="display:none;"></div>';
+                                                		echo '<button type="button" class="btn btn-default buttonForManagers" data-dismiss="modal" id="deleteBtn' .$row['customerId'] .'" onclick="deleteCustomer(' .$row['customerId'] .')" style="float: left;display: block; margin: auto;">';
+                                                		echo 'מחק ';
+                                                		echo '</button>'; 
+                                                		 echo '<button type="button" class="btn btn-default buttonForManagers" id="updateBtn' .$row['customerId'] .'" onclick="updateCustomer(' .$row['customerId'] .')" style="float: left;display: block; margin: auto;">';
+                                                		echo 'עדכן  ';
+                                                		echo '</button>'; 
+                                                	   echo '</div>';
+                                                    echo '</div>';
+                                                  echo '</div>';
+                                                echo '</div>';
+                                        }
+                                    ?>
 
-<div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-    היסטוריית קניות לקוח    
+    <!-- Data Table area End-->
+    <!-- Button trigger modal -->
+                 
+<!-- Button trigger modal -->
+<div class="buttonMargin">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewCustomer">
+  הוספת לקוח חדש
+</button>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="addNewCustomer"      tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+<!--<div class="modal fade" id="addNewCustomer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
-      </h2>
-    </div>
-    
-
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-
-<table class="table">
-                          <thead>
-                            <tr>
-                                <th scope="col">תאריך קנייה</th>
-                                <th scope="col">שם מוצר</th>
-                                <th scope="col">עלות</th>
-
-                            </tr>
-                          </thead>
-                          <tbody id="tbody">
-                            <tr>
-                                <td> 24.4.19</td>
-                                <td> מכסחת דשא</td>
-                                <td> 1000 </td>
-
-
-                            </tr>
-                          </tbody>
-                    </table>
-
+        <h3 class="modal-title" id="exampleModalLabel" style="text-align:center" >יצירת לקוח חדש</h5>
       </div>
-    </div>
-  </div>
-
-
-</div>
-
-</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td class="centerTableTr">מנהל</td>
-                                        <td class="centerTableTr">ami@gmail.com</td>
-                                        <td class="centerTableTr">עמי מרציאנו</td>
-                                    </tr>
-                                    
-                                    
-                                    
-                                    
-                                    <tr>
-                                        <td class="centerTableTr">מנהל</td>
-                                        <td class="centerTableTr">ami@gmail.com</td>
-                                        <td class="centerTableTr">עמי מרציאנו</td>
-                                        
-                                        <td>
-                                        
-                                        <p>
-
-  <button onclick="myFunction()" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    היסטוריית קניות לקוח
-  </button>
-</p id="demo">
-</td>
-</tr>
-<tr>
-
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-
-<table class="table" >
-                          <thead>
-                            <tr>
-                                <th scope="col">תאריך קנייה</th>
-                                <th scope="col">שם מוצר</th>
-                                <th scope="col">עלות</th>
-                            </tr>
-                          </thead>
-                          <tbody id="tbody">
-                            <tr>
-                                <td> 24.4.19</td>
-                                <td> מכסחת דשא</td>
-                                <td> 1000 </td>
-                            </tr>
-                          </tbody>
-                    </table>
-
-  </div>
-</div>
-                                        
-                                        </tr>
-                                    
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="modal-body">
+        <form method="POST" action="" class="formRight">
+        <p> <input type="text" name="firstName" id="firstName" pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד" required    > &nbsp; :שם פרטי </p>
+        <p> <input type="text" name="lastName" id="lastName"  pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד" required   > &nbsp;:שם משפחה</p>
+        <p> <input type="text" name="customerId" id="id" pattern= "[0-9]{8,9}" title="אנא הזן מספרים בלבד" required > &nbsp;:תעודת זהות</p>
+        <p> <input type="tel" name="phone" id="phone"  pattern="05?[0-9]-?[0-9]{7}" title="אנא הזן מספר סלולרי תקין" required > &nbsp;:מספר טלפון</p>
+        <p> <input type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="אנא הזן כתובת מייל תקינה" required  >&nbsp; :כתובת מייל</p>
         </div>
-    </div>
+      <div class="modal-footer">
+        <input type="button" value="סגור" data-dismiss="modal">
+        <input type="submit" value="שמור" name="addCustomer" >
+      </div>
+    </form>
+  </div>
+  </div>
+</div>
 
- 
+<?php
+    if(isset($_POST['addCustomer'])){
+        require_once('../php/Customer.php');
+        global $customer;
+        $customer->addNewCustomer();
+        $isCustomerAddedSuccessfully;
+        if($isCustomerAddedSuccessfully){
+            //echo "<script type='text/javascript'> $(window).load(function(){ $('#customerAdded').modal('show'); }); </script>";
+        }
+        else{
+           // echo "<script type='text/javascript'> $(window).load(function(){ $('#errorCustomerAdd').modal('show'); }); </script>";
+        }
+    }
+    if(isset($_POST['deleteCustomerId'])){
+        require_once('../php/Customer.php');
+        global $customer;
+        echo 'inside tje delete';
+        $result = $customer->deleteCustomer();
+    }
+    if(isset($_POST['customerIdForUpdate'])){
+        require_once('../php/Customer.php');
+        global $customer;
+        $result = $customer->updateCustomer();
+    }
+    
+?>
+
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -245,10 +302,9 @@
         </div>
     </div>
 
-    
-        <!-- End Footer area-->
+    <!-- End Footer area-->
         
-        <!--Bootstrap JS-->
+    <!--Bootstrap JS-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <!--AJAX JS-->
@@ -309,13 +365,6 @@
     <script src="../js/main.js"></script>
 
 
-
-
-<script>
-function myFunction() {
-  document.getElementById("demo").innerHTML = "Hello World";
-}
-</script>
 </body>
 
 </html>
