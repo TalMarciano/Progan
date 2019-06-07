@@ -4,15 +4,53 @@
 .centerText{
 	text-align:center !important;
 }
+.classForInputProductsTableEdir{
+    width: 100%;
+    text-align: center;
+}
 
 .centerNavBar{
     display:inline-block;
     text-align:center;
 }
+.searchBarStyle{
+    text-align:right; 
+    margin:auto;
+    display:block;
+}
+.modalTableButton{
+    width: 50%;
+    font-size: 20px;  
+    text-align: center;
+}
+.tableBorder{
+  border: 1px solid black;
+
+}
+.modalButtonValue{
+    text-align: right;
+    width: 50%;
+    font-size: 20px;  
+
+}
+.boxForEditTableModal{
+    text-align:center;
+    width:50%;  
+    margin:auto
+}
 .centerTableTr{
     text-align:center;
 }
-
+.fontSizeModalTable{
+    font-size: 20px;
+    text-align:center;
+}
+.tableBoldText{
+    font-weight: bold;
+}
+.modalTable{
+    width:100%;
+}
 #test{
     text-align:center;
 }
@@ -28,6 +66,14 @@
 
 }
 
+input{
+    text-align: right;
+}
+
+form p{
+    text-align: right;
+}
+
 .marginAndFloat{
     float: right;
     margin-left: 3%;
@@ -36,6 +82,8 @@
 .buttonMargin{
     margin-top: 2%;
     margin-left: 43%;
+
+}
     
 #myInput {
   background-image: url('/css/searchicon.png');
@@ -53,6 +101,12 @@
     color: "red";
     border-color: red;
     /*הסטוריית מכירות - נסיון על כפתור החיפוש*/
+}
+
+#calendar{
+    width: 100%;
+    text-align: center;
+    padding: 20px;
 }
 
 
