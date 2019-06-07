@@ -9,7 +9,7 @@
 			error_reporting(E_ERROR);
 			$this->connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 			if($this->connection->connction_error){
-				die("Connection faile: " .$conn->connection_error);
+				die("Connection failed: " .$conn->connection_error);
 			}
 		}
 		public function get_connection(){
@@ -21,6 +21,8 @@
 				return null;
 			}
 			else{
+			   // echo 'this is in the db.php';
+			   // var_dump($result);
 			   return $result;
 			}
 		}
