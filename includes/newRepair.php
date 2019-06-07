@@ -1,5 +1,11 @@
-<!doctype html>
-<link  rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<?php
+    session_start();
+  /*  if(!isset($_SESSION['userEmail'])){
+        header('Location: http://amitsl.mtacloud.co.il');
+    }*/
+
+?>
+<!DOCTYPE html>
 <html class="no-js" lang="">
 
 <head>
@@ -8,6 +14,8 @@
     <title>Progan Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- OUR CSS ============================================ -->
+    <link rel="stylesheet" href="../css/ourCss/style.css">
     <!-- Google Fonts ============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS ============================================ -->
@@ -24,8 +32,6 @@
     <link rel="stylesheet" href="../css/animate.css">
     <!-- normalize CSS ============================================ -->
     <link rel="stylesheet" href="../css/normalize.css">
-    <!-- mCustomScrollbar CSS============================================ -->
-    <link rel="stylesheet" href="../css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- jvectormap CSS	============================================ -->
     <link rel="stylesheet" href="../css/jvectormap/jquery-jvectormap-2.0.3.css">
     <!-- notika icon CSS ============================================ -->
@@ -36,297 +42,275 @@
     <link rel="stylesheet" href="../css/wave/waves.min.css">
     <!-- style CSS ============================================ -->
     <link rel="stylesheet" href="../css/style.css">
-        <!-- style CSS ============================================ -->
-    <link rel="stylesheet" href="../css/ourCss/style.css">
     <!-- responsive CSS	============================================ -->
     <link rel="stylesheet" href="../css/responsive.css">
     <!-- modernizr JS ============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Bootstrap And JQuery ============================================ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+        <!-- jquery ============================================ -->
+    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+     <!-- bootstrap JS ============================================ -->
+    <script src="../js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
     <!-- START Include for Header -->
-        <?php include "../php/header.php" ?> 
+   <?php include "../php/header.php" ?> 
     <!-- END Include for Header -->
-    
     <!-- START Include for Menu -->
-         <?php include "../php/menu.php" ?> 
+     <?php include "../php/menu.php" ?> 
     <!-- END Include for Menu-->
     
-    <!-- Form Element area Start-->
+    <!-- START BODY-->
     <form method="POST" action="">
-    <div class="form-element-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-element-list">
-                        <div class="basic-tb-hd">
-                            <h1 class="centerText">תיקון חדש</h2><br>
-                            <h2 id="test">פרטי הלקוח</p>
-                        </div>
-                        <div class="cmp-tb-hd bcs-hd">
-                        </div>
-                        <div class="row">
-                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        שם פרטי<input type="text" name = "firstName" class="form-control">
-                                    </div>
+        <div class="form-element-area">
+            <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-element-list">
+                                <div class="basic-tb-hd">
+                                    <h1 class="centerText">תיקון חדש</h1><br>
+                                    <h2 id="test">פרטי הלקוח</h2>
                                 </div>
-                            </div>
-                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
+                                <!--Start Customer Details-->
+                                <div class="row">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                          שם פרטי
+                                            <input type="text" name = "firstName" pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד" required class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="nk-int-st">
-                                        שם משפחה<input type="text" name = "lastName" class="form-control">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin: 10px auto;text-align:center;">
+                                          שם משפחה
+                                            <input type="text" name = "lastName" pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד" required class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                            טלפון
+                                            <input type="text" name = "phone"  pattern="05?[0-9]-?[0-9]{7}" title="אנא הזן מספר סלולרי תקין" required class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="nk-int-st">
-                                        מספר טלפון<input type="text" name = "phone"  class="form-control">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                            תעודת זהות
+                                            <input type="text" name = "customerId"   pattern= "[0-9]{8,9}" title="אנא הזן מספרים בלבד" required class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                            אי-מייל
+                                            <input type="text" name = "customerEmail"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="אנא הזן כתובת מייל תקינה" required class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="nk-int-st">
-                                        אי-מייל <input type="text" name = "customerEmail"  class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class= "textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        תעודת זהות<input type="text" name = "customerId" class="form-control">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto; text-align:center;">
+                                            היכן נקנה
+                                            <input type="text" name = "comment" pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד"   class="form-control">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                 </div>
-                </div>
-            </div>
-            
-             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-element-list mg-t-30">
-                        <div class="basic-tb-hd">
+                    </div>
+        <!--END Customer Details-->
+        <!-- Data Table area Start-->
+                <div class = "row">
+                    <div class="data-table-area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="data-table-list">
+                                        <div class="basic-tb-hd">
+                                            <h2 style="text-align:center">מוצרים</h2>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table id="data-table-basic" class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="centerTableTr"></th>
+                                                        <th class="centerTableTr" >מספר ימים משוער לתיקון</th>
+                                                        <th class="centerTableTr" >מחיר משוער</th>
+                                                        <th class="centerTableTr" >פירוט הבעיה</th>
+                                                        <th class="centerTableTr" >מק"ט</th>
+                                                        <th class="centerTableTr" >שם המוצר</th>
+                                                        <th><a href="#!" style="font-size:30px;" id="addNewRow" ><span class="glyphicon glyphicon-plus"></span></a></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="productsTable">
+                                                    <tr>
+                                                        <td style="padding:25px;"><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
+                                                        <td><input type="text" class="form-control" name="estimateRepairDays1" pattern= "[0-9]+" title="אנא הזן מספרים בלבד" required></td>
+                                                        <td><input type="text" class="form-control" name="estimatePrice1" pattern= "[0-9]+" title="אנא הזן מספרים בלבד" required></td>
+                                                        <td><input type="text" class="form-control" name="repairDescription1"  pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד" required ></td>
+                                                        <td><input type="text" class="form-control" name="repairProductId1" pattern= "[0-9]+" title="אנא הזן מספרים בלבד" required></td>
+                                                        <td><input type="text" class="form-control" name="repairProductName1"  pattern= "[A-Za-z 0-9 א-ת]+" title="אנא הזן אותיות בלבד" required ></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-<script>
-function addRowHandlers() {
-    var table = document.getElementById("data-table-basic");
-    var rows = table.getElementsByTagName("tr");
-    for (i = 1; i < rows.length; i++) {
-        var row = table.rows[i];
-        row.onclick = function(myrow){
-                          return function() { 
-                             var cell = myrow.getElementsByTagName("td")[0];
-                             var id = cell.innerHTML;
-                             alert("id:" + id);
-                      };
-                  }(row);
-    }
-}
-</script>
-
-<!-- Data Table area Start-->
-<div class = "row">
-    <div class="data-table-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2 style="text-align:center">מוצרים</h2>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="centerTableTr"></th>
-                                        <th class="centerTableTr" >מספר ימים משוער לתיקון</th>
-                                        <th class="centerTableTr" >מחיר משוער</th>
-                                        <th class="centerTableTr" >פירוט הבעיה</th>
-                                        <th class="centerTableTr" >מק"ט</th>
-                                        <th class="centerTableTr" >שם המוצר</th>
-                                        <th><a href="javascript:void(0);" style="font-size:30px;" id="addMore" title="Add More Person"><span class="glyphicon glyphicon-plus"></span></a></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
-                                        <td><input type="text" class="form-control" name="estimateRepairDays"></td>
-                                        <td><input type="text" class="form-control" name="estimatePrice"></td>
-                                        <td><input type="text" class="form-control" name="repairDescription"></td>
-                                        <td><input type="text" class="form-control" name="repairProductId"></td>
-                                        <td><input type="text" class="form-control" name="repairProductName"></td>
-                                    </tr>
-                            
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    
-<!-- Data Table area End-->
-    
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-element-list mg-t-30">
-                        <div class="cmp-tb-hd">
-
-                            <h2 class="centerText">פרטי התיקון </p>
-                        </div>
-                        <div class="row">
-                            <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
-                                    </div>
-                                    <div class="nk-int-st">
-                                        סה"כ מחיר לתיקון<input type="text" name="totalPriceRepair" class="form-control">
-                                    </div>
+        <!-- Repair details -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-element-list">
+                                <div class="basic-tb-hd">
+                                    <h2 id="test">פרטי תיקון</h2>
                                 </div>
-                            </div>
-                             <div class="textRight" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int float-lb floating-lb">
-                                    <div class="form-ic-cmp">
+                                <div class="row">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                            סה"כ מחיר לתיקון
+                                            <input type="text" name = "priceForTotalRepair"  pattern= "[0-9]+" title="אנא הזן מספרים בלבד" required class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="nk-int-st">
-                                        הערות<input type="text" name="repairComment" class="form-control">
+                                    <!--Element in Row-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
+                                        <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
+                                            הערות
+                                            <input type="text" name = "comment2"   pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד" class="form-control">
+                                        </div>
                                     </div>
+                                    <input style="display:block;margin:auto;"type="submit" value="שמור תיקון" name="addRepair">
                                 </div>
                             </div>
                         </div>
-                        <br>
-                <input class="marginAndFloat" type="submit" value="שמור תיקון" name="addRepair">
-                     
                     </div>
-                </div>
+            <!--END Customer Details-->
             </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
+        </div>   
     </form>
-    <!-- Form Element area End-->
-    <!-- Datepicker area Start-->
-    <!-- Datepicker area End-->
-    <!-- Color Picker area Start-->
-    <!-- Color Picker area End-->
-    <!-- Summernote area Start-->
-    <!-- Summernote area End-->
-    <!-- Dropzone area Start-->
-    <!-- Dropzone area End-->
+    <!-- END BODY-->
     
-<?php
-      if($_POST['addRepair']){
-            require_once('../php/Database.php');
-            global $db;
-            $db->query("SET CHARACTER SET 'hebrew'");
-            $db->query("SET NAMES 'utf8'");
-            if(!$db->get_connection()){
-                die("Connection failed!");
+    <!-- PHP SEND FORM-->
+        <?php
+            session_start();
+            if($_POST['addRepair']){
+                require_once('../php/Repair.php');
+                $isRepairAddedSuccessfully = false;
+                $isCustomerDetailsOK = FALSE;
+                $isProductsAddedOk = false;
+                global $repair;
+                $repair->addNewRepair();
+                if($isRepairAddedSuccessfully && $isCustomerDetailsOK){ 
+                /*order added */
+                echo "<script type='text/javascript'> $(window).load(function(){ $('#repairAddedSuccessfully').modal('show'); }); </script>";
+
+                }else if (!$isCustomerDetailsOK){
+                /*Detaild issues*/
+                echo "<script type='text/javascript'> $(window).load(function(){ $('#invalidCustomerDetails').modal('show'); }); </script>";
+
+                }else if (!$isRepairAddedSuccessfully || !$isProductsAddedOk){
+                /*Product issues*/
+                echo 'inside last if<br>' ;
+                echo "<script type='text/javascript'> $(window).load(function(){ $('#invalidProductsOrder').modal('show'); }); </script>";
+
+                }
             }
-            else{
-                $firstName = filter_input(INPUT_POST, 'firstName'); 
-                $lastName = filter_input(INPUT_POST, 'lastName'); 
-                $phone = filter_input(INPUT_POST, 'phone');
-                $customerEmail = filter_input(INPUT_POST, 'customerEmail');
-                $customerId = filter_input(INPUT_POST, 'customerId');
-                $repairProductName = filter_input(INPUT_POST, 'repairProductName');
-                $repairProductId = filter_input(INPUT_POST, 'repairProductId');
-                $repairDescription = filter_input(INPUT_POST, 'repairDescription');
-                $estimatePrice = filter_input(INPUT_POST, 'estimatePrice');
-                $estimateRepairDays = filter_input(INPUT_POST, 'estimateRepairDays');
-                $totalPriceRepair = filter_input(INPUT_POST, 'totalPriceRepair');
-                $repairComment = filter_input(INPUT_POST, 'repairComment');
-                $repairStatusId = filter_input(INPUT_POST, '1');
-                /*if(User::checkUserName($email)){
-    		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Email is invalid.', 'error')</script>";
-                }
-      
-                else if(User::checkNameAndLastName($firstName, $lastName)){
-    		        echo "<script type='text/javascript'>Swal.fire('Failed to register', 'Name or Last name is invalid.', 'error')</script>";
-                }
+        ?>
+    <!-- PHP SEND FORM-->
     
-               else{*/
-                    //$repairid = $db->query("SELECT orderid FROM orders ORDER BY orderid DESC LIMIT 0, 1");
-                    //echo $orderid['orderid'];
-                    
-                    $sql1 = "INSERT INTO customers(firstName, lastName, phone, email, customerId, dateCreated) 
-                    values ('" .$firstName ."','" .$lastName ."','" .$phone ."','" .$customerEmail ."','" .$customerId ."', now())";
-                    echo $sql1 .' This is after sql query '; 
-                    $result1 = $db->query($sql1);
-                   	Print_r ($result1); 
-                   	$sql2 = "INSERT INTO repair(repairProductName, repairProductId, repairDescription, estimatePrice, estimateRepairDays, totalPriceRepair, repairComment, customerId, dateCreated) 
-                    values ('".$repairProductName ."'," .$repairProductId. ",'".$repairDescription."',".$estimatePrice.", ".$estimateRepairDays.", ".$totalPriceRepair.", '".$repairComment."', '" .$customerId ."', now())";
-                    echo $sql2; 
-                    $result2 = $db->query($sql2);
-                   	Print_r ($result2); 
-                   	$sql3 = "INSERT INTO repairStatuses(repairStatus, customerId, productId) 
-                    values ('1','".$customerId."','".$repairProductId."')";
-                    echo $sql3; 
-                    $result3 = $db->query($sql3);
-                   	Print_r ($result3); 
-            
-                    if(!$result1 || !$result2 || !$result3){
-                        global $errorAddedUser;
-                        $errorAddedUser = TRUE;
-                        $invalidRegister = TRUE;
-                    }
-                    else{
-                        $invalidRegister = FALSE;
-                        global $userAddedSucessfuly;
-                        $userAddedSucessfuly = TRUE;
-                       // echo '<meta http-equiv="refresh" content="0">'; //for reload page
-                }
-                
-              /*  while($row = $result3->fetch_assoc()){
-                                            echo '<tr>';
-                                            if ($row['repairStatus'] == 1){
-                                                echo '<td class="centerTableTr">בטיפול</td>';
-                                            }
-                                            else if ($row['repairStatus'] == 2){
-                                                echo '<td class="centerTableTr">הושלם</td>'
-                                            }
-                                            else{
-                                                    echo '<td class="centerTableTr">נאסף</td>';
+<!--Modal for order added-->
+    <div class="modal fade" id="repairAddedSuccessfully" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style ="text-align:center;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                הזמנה נוספה בהצלחה
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            הזמנתך נוספה בהצלחה
+           <br>
+            כעת אתה יכול לראות את ההזמנה בעמוד היסטוריית המכירות
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:auto;display:block;">
+                סגור
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!--Modal for Repair added-->
+    
+<!--Modal for Customer details invalid - Repair did not added successfully-->
+    <div class="modal fade" id="invalidCustomerDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style ="text-align:center;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                מצטערים אך הזמנתך לא נוספה בהצלחה
+                </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            נראה כי היתה בעיה עם פרטי הלקוח
+            <br>
+            אנא נסה שנית
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:auto;display:block;">
+                סגור
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!--Modal for Customer details invalid - Repair did not added successfully-->
 
-                                            }
-                                           echo '<td class="centerTableTr">' .$row['email'] .'</td>';
-                                           echo ' <td class="centerTableTr">' .$row['userName'] .'</td>';
-                                           echo ' <td class="centerTableTr">' .$row['lastName'] .'</td>';
-                                          echo ' <td class="centerTableTr">' .$row['firstName'] .'</td>';
-                                       echo '</tr> ';
-                                        }*/
-                                        
-          } 
-            }
-      //}
-      
+<!--Modal for error added the order products were invalid-->
+    <div class="modal fade" id="invalidProductsOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"style ="text-align:center;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                מצטערים אך הזמנתך לא נוספה בהצלחה
+                </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            נראה כי היתה בעיה עם המוצרים שהוזנו או כלל ההזמנה
+            <br> 
+            אנא נסה שנית
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:auto;display:block;">
+                סגור
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--Modal for error added the order products were invalid-->
 
-          
-?>
+    
+    
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -339,15 +323,11 @@ function addRowHandlers() {
             </div>
         </div>
     </div>
-    <!-- End Footer area-->
-    <!-- jquery ============================================ -->
-    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
-    <!-- bootstrap JS ============================================ -->
-    <script src="../js/bootstrap.min.js"></script>
+
+     <!-- End Footer area-->
+
     <!-- wow JS ============================================ -->
     <script src="../js/wow.min.js"></script>
-    <!-- price-slider JS ============================================ -->
-    <script src="js/jquery-price-slider.js"></script>
     <!-- owl.carousel JS ============================================ -->
     <script src="../js/owl.carousel.min.js"></script>
     <!-- scrollUp JS ============================================ -->
@@ -358,12 +338,6 @@ function addRowHandlers() {
     <script src="../js/counterup/jquery.counterup.min.js"></script>
     <script src="../js/counterup/waypoints.min.js"></script>
     <script src="../js/counterup/counterup-active.js"></script>
-    <!-- mCustomScrollbar JS ============================================ -->
-    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- jvectormap JS ============================================ -->
-    <script src="../js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="../js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="../js/jvectormap/jvectormap-active.js"></script>
     <!-- sparkline JS ============================================ -->
     <script src="../js/sparkline/jquery.sparkline.min.js"></script>
     <script src="../js/sparkline/sparkline-active.js"></script>
@@ -389,34 +363,8 @@ function addRowHandlers() {
     <script src="../js/todo/jquery.todo.js"></script>
     <!-- plugins JS ============================================ -->
     <script src="../js/plugins.js"></script>
-    <!-- main JS ============================================ -->
-    <script src="../js/main.js"></script>
+    <!--Script to add new rows with count ids-->
+    <script src="../js/ourJs/jsForNewRowsRepair.js">></script>
 
 </body>
-
-<!--- START SCRIPT TO ADD ROW IN TABLE-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
-<script>
-$(function(){
-    $('#addMore').on('click', function() {
-              var data = $("#data-table-basic tr:eq(1)").clone(true).appendTo("#data-table-basic");
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove', function() {
-         var trIndex = $(this).closest("tr").index();
-            if(trIndex>0) {
-             $(this).closest("tr").remove();
-           } else {
-             alert("Sorry!! Can't remove first row!");
-           }
-      });
-});      
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
-<!--- END SCRIPT TO ADD ROW IN TABLE-->
-
 </html>
-
-
