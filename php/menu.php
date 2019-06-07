@@ -17,7 +17,7 @@
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#repairMobile" href="#">תיקון</a>
                                         <ul id="repairMobile" class="collapse dropdown-header-top">
-                                            <li><a href="acollectedRepairs.php">תיקונים שנאספו</a></li>
+                                            <li><a href="collectedRepairs.php">תיקונים שנאספו</a></li>
                                             <li><a href="completedRepairs.php">תיקונים שהושלמו</a></li>
                                             <li><a href="TreatmentRepairs.php">תיקונים בטיפול</a></li>
                                             <li><a href="newRepair.php">תיקון חדש</a></li>
@@ -33,7 +33,7 @@
                                     <li><a data-toggle="collapse" data-target="#stockMobile" href="#">מלאי</a>
                                         <ul id="stockMobile" class="collapse dropdown-header-top">
                                             <li><a href="rentInventory.php">מלאי השכרות</a></li>
-                                            <li><a href="PdroductInventory.php">מלאי מוצרים</a></li>
+                                            <li><a href="ProductInventory.php">מלאי מוצרים</a></li>
                                         </ul>
                                     </li>
                                     <li><a data-target="#customersMobile" href="customers.php">לקוחות</a>
