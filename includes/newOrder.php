@@ -1,5 +1,9 @@
 <?php
     session_start();
+     /*  if(!isset($_SESSION['userEmail'])){
+        header('Location: http://amitsl.mtacloud.co.il');
+    }*/
+
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="">
@@ -77,42 +81,42 @@
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
                                         <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
                                           שם פרטי
-                                            <input type="text" name = "firstName" class="form-control">
+                                            <input type="text" name = "firstName"  pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד" required  class="form-control">
                                         </div>
                                     </div>
                                     <!--Element in Row-->
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
                                         <div class="form-group ic-cmp-int float-lb floating-lb" style="margin: 10px auto;text-align:center;">
                                           שם משפחה
-                                            <input type="text" name = "lastName" class="form-control">
+                                            <input type="text" name = "lastName"  pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד" required   class="form-control">
                                         </div>
                                     </div>
                                     <!--Element in Row-->
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
                                         <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
                                             טלפון
-                                            <input type="text" name = "phone" class="form-control">
+                                            <input type="text" name = "phone" pattern="05?[0-9]-?[0-9]{7}" title="אנא הזן מספר סלולרי תקין" required  class="form-control">
                                         </div>
                                     </div>
                                     <!--Element in Row-->
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
                                         <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
                                             תעודת זהות
-                                            <input type="text" name = "customerId" class="form-control">
+                                            <input type="text" name = "customerId"  pattern="[0-9]{8,9}" title="אנא הזן תעודת זהות, כולל ספרת ביקורת" required class="form-control">
                                         </div>
                                     </div>
                                     <!--Element in Row-->
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
                                         <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto;text-align:center;">
                                             אי-מייל
-                                            <input type="text" name = "customerEmail" class="form-control">
+                                            <input type="text" name = "customerEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="אנא הזן כתובת מייל תקינה" required class="form-control">
                                         </div>
                                     </div>
                                     <!--Element in Row-->
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 textRight" style="float:right;padding:0px;">
                                         <div class="form-group ic-cmp-int float-lb floating-lb" style="margin:10px auto; text-align:center;">
                                             הערות
-                                            <input type="text" name = "comment" class="form-control">
+                                            <input type="text" name = "comment"  pattern= "[A-Za-z א-ת]+" title="אנא הזן אותיות בלבד"  class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -131,24 +135,26 @@
                                             <h2 style="text-align:center">מוצרים</h2>
                                         </div>
                                         <div class="table-responsive">
-                                            <table id="data-table-basic" class="table table-striped">
+                                            <table DIR="RTL" id="data-table-basic" class="table table-striped">
                                                 <thead>
+                                                    <th><a href="#!" style="font-size:30px;" id="addNewRow" title="Add More Person"><span class="glyphicon glyphicon-plus"></span></a></th>
                                                     <tr>
-                                                        <th class="centerTableTr"></th>
-                                                        <th class="centerTableTr">כמות</th>
-                                                        <th class="centerTableTr">מחיר ליחידה</th>
-                                                        <th class="centerTableTr">מק"ט</th>
                                                         <th class="centerTableTr">שם המוצר</th>
-                                                        <th><a href="#" style="font-size:30px;" id="addNewRow" title="Add More Person"><span class="glyphicon glyphicon-plus"></span></a></th>
+                                                        <th class="centerTableTr">מק"ט</th>
+                                                        <th class="centerTableTr">מחיר ליחידה</th>
+                                                        <th class="centerTableTr">כמות</th>
+                                                        <th class="centerTableTr"></th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody id="productsTable">
                                                     <tr>
+                                                        <td><input type="text" class="form-control" name="productName1" pattern= "[A-Za-z א-ת 0-9]+" title="אנא הזן שם מוצר- אותיות/ ספרות בלבד" required></td>
+                                                        <td><input type="text" class="form-control" name="productId1"  pattern= "[0-9]+" title="אנא הזן מספרים בלבד" required ></td>
+                                                        <td><input type="text" class="form-control" name="totalPrice1"  pattern= "[0-9]+" title="אנא הזן מספרים בלבד" required ></td>
+                                                        <td><input type="text" class="form-control" name="quantity1" pattern= "[0-9]+" title="אנא הזן מספרים בלבד" required  ></td>
                                                         <td style="padding:25px;"><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
-                                                        <td><input type="text" class="form-control" name="quantity1"></td>
-                                                        <td><input type="text" class="form-control" name="totalPrice1"></td>
-                                                        <td><input type="text" class="form-control" name="productId1"></td>
-                                                        <td><input type="text" class="form-control" name="productName1"></td>
+
                                                     </tr>
                                             
                                                 </tbody>
